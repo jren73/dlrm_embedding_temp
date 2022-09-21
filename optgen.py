@@ -133,8 +133,7 @@ if __name__ == "__main__":
 
     
     seq_number = 0
-    #for b in tqdm(block_trace):
-    for b in tqdm(block_tmp):
+    for b in tqdm(block_trace):
         seq_number+=1
         if(seq_number % (blockTraceLength / 10) == 0):
             print("Completed "+str(( seq_number * 100 / blockTraceLength)) + " %")
