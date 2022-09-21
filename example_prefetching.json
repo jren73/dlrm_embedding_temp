@@ -1,0 +1,23 @@
+{
+        "decoder": "Luong",
+        "encoder": "RNN",
+        "n_channels": 150,
+        "encoder_hidden": 300,
+        "encoder_layers": 1,
+        "encoder_dropout": 0.0,
+        "bidirectional_encoder": false,
+        "decoder_hidden": 300,
+        "decoder_layers": 1,
+        "decoder_dropout": 0.1,
+        "bidirectional_decoder": false,
+        "n_classes": 50,
+        "evaluation_window": 150,
+        "batch_size": 30,
+        "sampling_prob": 0.5,
+        "embedding_dim": 300,
+        "attention_score": "general",
+        "attention_mlp_pre": false,
+        "learning_rate": 0.001,
+        "gpu": false,
+        "loss": "Intersection_over_Union"
+      }
