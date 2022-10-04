@@ -177,13 +177,13 @@ class Seq2Seq(nn.Module):
         """initialization."""
         super(Seq2Seq, self).__init__()
         self.config = config
-        self.encoder_num_hidden = config["encoder_hidden"]
-        self.decoder_num_hidden = config["decoder_hidden"]
-        self.learning_rate = config["learning_rate"]
-        self.batch_size = config["batch_size"]
+        self.encoder_num_hidden = config.get("encoder_hidden")
+        self.decoder_num_hidden = config.get("decoder_hidden")
+        self.learning_rate = config.get("learning_rate")
+        self.batch_size = config.get("batch_size")
         self.shuffle = False
 
-        self.T = config["n_channels"]
+        self.T = config.get("n_channels")
         self.dataset = dataset
 
         X = []
