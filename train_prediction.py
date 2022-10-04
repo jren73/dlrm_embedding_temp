@@ -6,7 +6,7 @@ import editdistance
 import matplotlib.pyplot as plt
 import tqdm
 import torch.nn.functional as F
-from seq2seq_prefetching import Seq2Seq
+from Seq2Seq_prefecthing import Seq2Seq
 from torch.utils.data import DataLoader
 from utils import prepare_data, MyDataset
 import pandas as pd
@@ -82,20 +82,20 @@ def run(mydataset, gt):
         config = json.load(f)
 
     config["gpu"] = torch.cuda.is_available()
-    BATCHSIZE = 30
-    config["batch_size"] = 30
     input_sequence_length = config["n_channels"]
     evaluation_windown_length = config["evaluation_window"]
     
     
-    train_set = MyDataset(mydataset[:FLAGS.train_size],gt[:FLAGS.train_size],input_sequence_length,evaluation_windown_length)
-    eval_dataset = MyDataset(mydataset[FLAGS.train_size:len(gt)],gt[FLAGS.train_size:len(gt)],input_sequence_length,evaluation_windown_length)
+    train_set = MyDataset(mydataset[:],gt[:],input_sequence_length,evaluation_windown_length)
+    #eval_dataset = MyDataset(mydataset[FLAGS.train_size:len(gt)],gt[FLAGS.train_size:len(gt)],input_sequence_length,evaluation_windown_length)
+
+      
     
     #train_set = ToyDataset(5, 15)
     #eval_dataset = ToyDataset(5, 15, type='eval')
-    train_loader = DataLoader(train_set, batch_size=BATCHSIZE, shuffle=False, collate_fn=None, drop_last=True)
-    eval_loader = DataLoader(eval_dataset, batch_size=BATCHSIZE, shuffle=False, collate_fn=None,
-                                  drop_last=True)
+    #train_loader = DataLoader(train_set, batch_size=BATCHSIZE, shuffle=False, collate_fn=None, drop_last=True)
+    #eval_loader = DataLoader(eval_dataset, batch_size=BATCHSIZE, shuffle=False, collate_fn=None,
+    #                              drop_last=True)
     '''
     t = tqdm.tqdm(train_loader)
     idx = 0
@@ -111,8 +111,20 @@ def run(mydataset, gt):
     #print(train_loader.shape)
     #print(eval_loader.shape)
     # Models
-    model = Seq2Seq(config)
+    #model = Seq2Seq(config)
 
+    model = Seq2Seq(config,
+        train_set
+    )
+
+    # Train
+    print("==> Start training ...")
+    model.train()
+
+    # Prediction
+    y_pred = model.test()
+
+    '''
     if USE_CUDA:
         model = model.cuda()
 
@@ -142,12 +154,13 @@ def run(mydataset, gt):
         #evaluate(model, eval_loader)
 
         # TODO implement save models function
-
+    '''
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str)
-    parser.add_argument('--epochs', default=120, type=int)
+    parser.add_argument('--epochs', default=1, type=int)
+    parser.add_argument('--sample_ratio', default=0.02, type=int)
     parser.add_argument('--traceFile', type=str,  help='trace file name\n')
     #parser.add_argument('--epochs', default=1200, type=int)
     #parser.add_argument('--train_size', default=4000000, type=int)
@@ -155,12 +168,13 @@ if __name__ == '__main__':
     #args = parser.parse_args() 
 
     FLAGS, _ = parser.parse_known_args()
-    dataset, gt = prepare_data(FLAGS.traceFile,1) 
+    traceFile = FLAGS.traceFile
+    sample_ratio = FLAGS.sample_ratio
+    dataset, gt = prepare_data(traceFile,sample_ratio,1) 
     
     #ensure the training and groudtruth has the same size. When we processing groundtruth, we cutout some data
     dataset = dataset[:len(gt)]
     FLAGS.train_size = int(len(dataset)*0.8)
     FLAGS.eval_size = len(gt) - FLAGS.train_size
-    FLAGS.epochs = 10
 
     run(dataset, gt)
