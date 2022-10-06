@@ -8,9 +8,9 @@
 	This algorithm simulates the OPT cache eviction policy.
 	Input: block trace file containing a column with multiple different Blocks.
 	Output: Cache Miss count and cache configuration.
-	
+
 	Description
-	
+
 	We first generate a dictionary of block numbers and their relative access sequence.
 	We call this dictionary the OPT dictionary.
 
@@ -30,7 +30,7 @@
 		miss_count++
 
 	hit_count+miss_count = sizeof block_request list
-		
+
 '''
 import torch
 import numpy as np
@@ -39,7 +39,7 @@ from functools import partial
 from tqdm import tqdm
 import pandas as pd
 from io import StringIO
-
+import os
 import argparse
 
 block_trace = []
@@ -56,7 +56,7 @@ def getFurthestAccessBlock():
     for cached_block in C:
         if len(OPT[cached_block]) == 0:
             #print ( "Not Acccessing block anymore " + str(cached_block))
-            return cached_block            
+            return cached_block
         if OPT[cached_block][0] > maxAccessPosition:
             maxAccessPosition = OPT[cached_block][0]
             maxAccessBlock = cached_block
@@ -66,19 +66,29 @@ def getFurthestAccessBlock():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='OPT.\n')
     parser.add_argument('cache_percent', type=float,  help='relative cache size, e.g., 0.2 stands for 20\% of total trace length\n')
-    parser.add_argument('ratio', type=float,  help='sample ratio\n')
+    #parser.add_argument('ratio', type=float,  help='sample ratio\n')
     #parser.add_argument('idx', type=int,  help='column number of blocks. type 0 if only 1 column containing block trace is present\n')
     parser.add_argument('traceFile', type=str,  help='trace file name\n')
-    args = parser.parse_args() 
+    args = parser.parse_args()
 
     cache_size = args.cache_percent
     #idx = args.idx
-    ratio = args.ratio
+    #ratio = args.ratio
     traceFile = args.traceFile
-    
-    
-    sampled_trace = traceFile[0:traceFile.rfind(".pt")] + f"_sampled_{int(ratio*100)}.txt"
 
+    folder_name = traceFile[0:traceFile.rfind("/")] + f"_cache_{int(cache_size*100)}"
+
+    print(folder_name)
+
+    isExist = os.path.exists(folder_name)
+    if not isExist:
+        # Create a new directory because it does not exist
+        os.makedirs(folder_name)
+        print("The {folder_name} is created!")
+
+
+    #sampled_trace = traceFile[0:traceFile.rfind(".pt")] + f"_sampled_{int(ratio*100)}.txt"
+    sampled_trace = traceFile
     file = open(sampled_trace,mode='r')
 
     # read all lines at once
@@ -89,49 +99,53 @@ if __name__ == "__main__":
     d = StringIO(all_of_it)
     trace = np.loadtxt(d, dtype=float)
     block_trace = trace[:,1]
-    
+
     #items = np.unique(block_trace)
     #print(f"num of unique indices is {len(items)}")
     #blockTraceLength = len(block_trace)
     #cache_size = int(cache_size * len(items))
 
     #block_trace =  block_trace.numpy()
-    
+
 
     items = np.unique(block_trace)
     print(f"num of unique indices is {len(items)}")
     blockTraceLength = len(block_trace)
-    cache_size = int(cache_size * len(block_trace))
-    
-    print(f"created block trace list, cache size is {cache_size}")
-    
+    cache_size = int(cache_size * len(items))
 
-    # build OPT 
-    
-    OPT = defaultdict(partial(np.ndarray,0))
-    
+    print(f"created block trace list, cache size is {cache_size}")
+
+
+    # build OPT
+
+    OPT = defaultdict(list)
+
 
     seq_number = 0
-    #for b in tqdm(block_trace):
+
     for b in tqdm(block_trace):
-        OPT[b] = np.append(OPT[b],seq_number)
+        #OPT[b] = np.append(OPT[b],seq_number)
+        OPT[b].append(seq_number)
         seq_number+=1
-    
-    print ("created OPT dictionary")    
+
+    print ("created OPT dictionary")
 
     # run algorithm
-    
+
     hit_count = 0
     miss_count = 0
-    
+
     C = set()
 
-    cached_trace = traceFile[0:traceFile.rfind(".pt")] + "_cached_trace_opt.txt"
-    dataset_trace = traceFile[0:traceFile.rfind(".pt")] + "_dataset_cache_miss_trace.txt"
+    cached_trace = folder_name  + traceFile[traceFile.rfind("/"):traceFile.rfind(".txt")] + "_cached_trace_opt.txt"
+    dataset_trace = folder_name + traceFile[traceFile.rfind("/"):traceFile.rfind(".txt")] + "_dataset_cache_miss_trace.txt"
+    print(cached_trace)
+    print(dataset_trace)
+
     f_hit = open(cached_trace,"w")
     f_miss = open(dataset_trace,"w")
 
-    
+
     seq_number = 0
     for b in tqdm(block_trace):
         seq_number+=1
@@ -162,7 +176,7 @@ if __name__ == "__main__":
             OPT[b] = np.delete(OPT[b],0)
             #print ("CACHE ")
             #print (C)
-    
+
     print ("hit count" + str(hit_count))
     print ("miss count" + str(miss_count))
     f_miss.close()
@@ -174,4 +188,3 @@ if __name__ == "__main__":
     #dataset_trace = traceFile[0:traceFile.rfind(".pt")] + "_dataset_cache_miss_trace.csv"
     #df = pd.DataFrame(cache_miss)
     #df.to_csv(dataset_trace)
-
