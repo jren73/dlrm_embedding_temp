@@ -11,7 +11,7 @@ n=${#SUBSTRING}
 pos=$(($m-$n))
 file_path="${INPUT:0:$((pos))}"
 echo "$file_path"
-for k in $( seq 0 3 )
+for k in $( seq 0 70 )
 do
   echo "$k"
   file=${k}".txt"
