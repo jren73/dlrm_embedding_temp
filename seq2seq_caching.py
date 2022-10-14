@@ -192,6 +192,7 @@ class seq2seq_cache(nn.Module):
         for i in self.dataset:
             X.append(i[0])
             y.append(i[1])
+            #print(i[0], i[1])
 
         if config.get('loss') == 'cross_entropy':
             self.loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)

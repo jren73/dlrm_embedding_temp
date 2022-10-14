@@ -112,7 +112,7 @@ def run(traceFile, model_type):
         raise FileNotFoundError
     if not os.path.exists(datafolder):
         raise FileNotFoundError
-    trace, res = grub_datafile(datafolder, inputsfolder)
+    trace, res = grub_datafile(datafolder, inputsfolder, model_type)
     print(res)
     print(trace)
     
@@ -156,10 +156,10 @@ def run(traceFile, model_type):
         assert(len(gt_trace) == len(block_trace))
 
         if model_type==1:
-            train_set = MyDataset_prefetch(block_trace[:],gt_trace[:],input_sequence_length,evaluation_windown_length)
+            train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length)
             model = seq2seq_prefetch(config, train_set)
         else:
-            train_set = MyDataset_cache(block_trace[:],gt_trace[:],input_sequence_length,evaluation_windown_length)
+            train_set = MyDataset_cache(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length)
             model = seq2seq_cache(config, train_set)
         # Train
         print("==> Start training ...")
