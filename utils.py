@@ -124,7 +124,7 @@ def collate_fn(data):
 
     return features.float(), labels.long(), lengths.long()
 
-#processing data: chuckization, chunksize is 1
+#processing data: chunkization, chunksize is 1
 def prepare_data(traceFile, ratio=0.1, model_type=1):
         sampled_trace = traceFile[0:traceFile.rfind(".pt")] + f"_sampled_{int(ratio*100)}.txt"
 

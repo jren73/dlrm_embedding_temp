@@ -6,7 +6,7 @@ import editdistance
 import matplotlib.pyplot as plt
 import tqdm
 import torch.nn.functional as F
-from Seq2Seq_prefecthing import Seq2Seq
+from seq2seq_prefetching import Seq2Seq
 from torch.utils.data import DataLoader
 from utils import prepare_data, MyDataset
 import pandas as pd
@@ -124,7 +124,7 @@ def run(mydataset, gt):
     # Prediction
     y_pred = model.test()
 
-    '''
+    
     if USE_CUDA:
         model = model.cuda()
 
@@ -154,13 +154,12 @@ def run(mydataset, gt):
         #evaluate(model, eval_loader)
 
         # TODO implement save models function
-    '''
+    
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str)
     parser.add_argument('--epochs', default=1, type=int)
-    parser.add_argument('--sample_ratio', default=0.02, type=int)
     parser.add_argument('--traceFile', type=str,  help='trace file name\n')
     #parser.add_argument('--epochs', default=1200, type=int)
     #parser.add_argument('--train_size', default=4000000, type=int)
@@ -169,12 +168,11 @@ if __name__ == '__main__':
 
     FLAGS, _ = parser.parse_known_args()
     traceFile = FLAGS.traceFile
-    sample_ratio = FLAGS.sample_ratio
-    dataset, gt = prepare_data(traceFile,sample_ratio,1) 
+    dataset, gt = prepare_data(traceFile,1) 
     
     #ensure the training and groudtruth has the same size. When we processing groundtruth, we cutout some data
     dataset = dataset[:len(gt)]
     FLAGS.train_size = int(len(dataset)*0.8)
-    FLAGS.eval_size = len(gt) - FLAGS.train_size
+   
 
     run(dataset, gt)

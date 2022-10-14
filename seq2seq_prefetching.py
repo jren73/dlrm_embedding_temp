@@ -5,7 +5,7 @@ import numpy as np
 
 from torch import nn
 from torch import optim
-
+from iou_loss import iou_accuracy,Chamfer1DLoss
 from torch.autograd import Variable
 import torch.nn.functional as F
 
