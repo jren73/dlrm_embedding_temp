@@ -161,7 +161,7 @@ class Decoder(nn.Module):
         return Variable(X.data.new(1, X.size(0), self.decoder_num_hidden).zero_())
 
 
-class seq2seq_prefetch(nn.Module):
+class seq2seq_caching(nn.Module):
     """
         Sequence to sequence module
     """
@@ -196,12 +196,8 @@ class seq2seq_prefetch(nn.Module):
         if config.get('loss') == 'cross_entropy':
             self.loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)
             config['loss'] = 'cross_entropy'
-        elif config.get('loss') == 'Intersection_over_Union':
-            self.loss_fn = Chamfer1DLoss()
-            config['loss'] = 'Intersection_over_Union'
         else:
-            self.loss_fn = torch.nn.NLLLoss(ignore_index=0)
-            config['loss'] = 'NLL'
+            print("wrong loss configuration")
         self.loss_type = config['loss']
         print(config)
 
