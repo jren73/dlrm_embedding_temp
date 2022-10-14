@@ -161,12 +161,12 @@ class Decoder(nn.Module):
         return Variable(X.data.new(1, X.size(0), self.decoder_num_hidden).zero_())
 
 
-class Seq2Seq(nn.Module):
+class seq2seq_prefetch(nn.Module):
     """
         Sequence to sequence module
     """
 
-    def __init__(self,dataset, config):#(self, X, y, T,
+    def __init__(self, config,dataset):#(self, X, y, T,
                  #encoder_num_hidden,
                  #decoder_num_hidden,
                  #batch_size,
@@ -175,7 +175,7 @@ class Seq2Seq(nn.Module):
                  #parallel=False):
                 
         """initialization."""
-        super(Seq2Seq, self).__init__()
+        super(seq2seq_prefetch, self).__init__()
         self.config = config
         self.encoder_num_hidden = config.get("encoder_hidden")
         self.decoder_num_hidden = config.get("decoder_hidden")
@@ -189,9 +189,6 @@ class Seq2Seq(nn.Module):
         X = []
         y = []
 
-        for i in self.dataset:
-            X.append(i[0])
-            y.append(i[1])
 
         if config.get('loss') == 'cross_entropy':
             self.loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)

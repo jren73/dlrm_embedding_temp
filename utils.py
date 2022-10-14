@@ -124,6 +124,7 @@ def collate_fn(data):
 
     return features.float(), labels.long(), lengths.long()
 
+
 #processing data: chunkization, chunksize is 1
 def prepare_data(traceFile, ratio=0.1, model_type=1):
         sampled_trace = traceFile[0:traceFile.rfind(".pt")] + f"_sampled_{int(ratio*100)}.txt"
@@ -190,7 +191,7 @@ class ToyDataset(data.Dataset):
 
         return x, b
 
-class MyDataset(data.Dataset):
+class MyDataset_prefetch(data.Dataset):
 
     def __init__(self, sample, groundtruth, input_sequence=10,evaluation_window=10):
         self.sample = sample
@@ -238,3 +239,33 @@ class MyDataset(data.Dataset):
         if(a[0]<sample_length):
             return [],[]
         return x,y
+
+
+class MyDataset_cache(data.Dataset):
+
+    def __init__(self, sample, groundtruth, input_sequence=10,evaluation_window=10):
+        self.sample = sample
+        self.groundtruth = groundtruth
+        self.max = max(np.max(sample),np.max(groundtruth))
+        assert(input_sequence != evaluation_window)
+        self.set = [self._sample(idx,input_sequence,evaluation_window) for idx in range(0, len(self.sample), input_sequence)]
+        #self.set = [self._test(idx,input_sequence,evaluation_window) for idx in range(0, len(self.sample), input_sequence)]
+        
+
+    def __len__(self):
+        return len(self.set)
+
+    def __getitem__(self, item):
+        return self.set[item]
+
+    def _sample(self, idx, sample_length, gt_length):
+        #data_X = torch.tensor(self.sample[idx])
+        #target_Y = torch.tensor(self.groundtruth[idx])
+        #print(idx)
+        if len(self.sample) < idx+sample_length:
+            return
+        x = self.sample[idx:idx+sample_length]
+        y = self.groundtruth[idx:idx+sample_length]
+       
+        return x,y
+
