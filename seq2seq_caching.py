@@ -161,7 +161,7 @@ class Decoder(nn.Module):
         return Variable(X.data.new(1, X.size(0), self.decoder_num_hidden).zero_())
 
 
-class seq2seq_caching(nn.Module):
+class seq2seq_cache(nn.Module):
     """
         Sequence to sequence module
     """
@@ -175,7 +175,7 @@ class seq2seq_caching(nn.Module):
                  #parallel=False):
                 
         """initialization."""
-        super(seq2seq_prefetch, self).__init__()
+        super(seq2seq_cache, self).__init__()
         self.config = config
         self.encoder_num_hidden = config.get("encoder_hidden")
         self.decoder_num_hidden = config.get("decoder_hidden")

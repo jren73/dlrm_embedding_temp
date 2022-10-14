@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import tqdm
 import torch.nn.functional as F
 from seq2seq_prefetching import seq2seq_prefetch
+from seq2seq_caching import seq2seq_cache
 from torch.utils.data import DataLoader
 from utils import prepare_data, MyDataset_cache, MyDataset_prefetch
 import pandas as pd
@@ -162,7 +163,7 @@ def run(traceFile, model_type):
             model = seq2seq_cache(config, train_set)
         # Train
         print("==> Start training ...")
-        model.train()
+        model.git()
 
         # Prediction
         y_pred = model.test()

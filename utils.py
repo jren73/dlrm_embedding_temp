@@ -247,7 +247,8 @@ class MyDataset_cache(data.Dataset):
         self.sample = sample
         self.groundtruth = groundtruth
         self.max = max(np.max(sample),np.max(groundtruth))
-        assert(input_sequence != evaluation_window)
+        print(input_sequence, evaluation_window)
+        assert(input_sequence == evaluation_window)
         self.set = [self._sample(idx,input_sequence,evaluation_window) for idx in range(0, len(self.sample), input_sequence)]
         #self.set = [self._test(idx,input_sequence,evaluation_window) for idx in range(0, len(self.sample), input_sequence)]
         
