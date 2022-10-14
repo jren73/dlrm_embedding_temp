@@ -245,9 +245,10 @@ class LuongDecoder(Decoder):
         # RNN (Eq 7 paper)
         embedded = self.embedding(input).unsqueeze(1) # [B, H]
         prev_hidden = prev_hidden.unsqueeze(0)
-        rnn_input = torch.cat((embedded, prev_hidden), -1) # NOTE : Tf concats `lambda inputs, attention: array_ops.concat([inputs, attention], -1)`.
-        rnn_output, hidden = self.rnn(rnn_input.transpose(1, 0), prev_hidden)
+        #rnn_input = torch.cat((embedded, prev_context), -1) # NOTE : Tf concats `lambda inputs, attention: array_ops.concat([inputs, attention], -1)`.
+        #rnn_output, hidden = self.rnn(rnn_input.transpose(1, 0), prev_hidden)
         #rnn_output, hidden = self.rnn(embedded, prev_hidden)
+        outputs, (hidden, cell) = self.rnn(embedded, (prev_hidden, cell))
         rnn_output = rnn_output.squeeze(1)
 
         # Attention weights (Eq 6 paper)

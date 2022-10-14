@@ -115,7 +115,7 @@ def run(traceFile, model_type):
     trace, res = grub_datafile(datafolder, inputsfolder, model_type)
     print(res)
     print(trace)
-    
+    model = seq2seq_prefetch(config)
     input_trace = ""
     output_trace = ""
     for f in trace:
@@ -156,16 +156,16 @@ def run(traceFile, model_type):
         assert(len(gt_trace) == len(block_trace))
 
         if model_type==1:
-            train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length)
-            model = seq2seq_prefetch(config) 
+            train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length) 
             train_loader = DataLoader(train_set, batch_size=BATCHSIZE, shuffle=False, collate_fn=None, drop_last=True)
+            model = seq2seq_prefetch(config)
    
         else:
             train_set = MyDataset_cache(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length)
             model = seq2seq_cache(config, train_set)
         # Train
         print("==> Start training ...")
-        model.train()
+        #model.train()
 
 
         
@@ -196,6 +196,25 @@ def run(traceFile, model_type):
             # Train needs to return model and optimizer, otherwise the model keeps restarting from zero at every epoch
             model, optimizer = train(model, optimizer, train_loader, run_state)
             #evaluate(model, eval_loader)
+
+
+        PATH = ""
+
+        if model_type ==0:
+            PATH = "cache_model.pt"
+        else:
+            PATH = "prefetch_model.pt"
+
+        # Save
+        torch.save(net.state_dict(), PATH)
+
+        # Load
+        if model_type ==0:
+            model = seq2seq_cache()
+        else:
+            model = seq2seq_prefetch
+        model.load_state_dict(torch.load(PATH))
+    evaluate(model, eval_loader)
 
 
     
