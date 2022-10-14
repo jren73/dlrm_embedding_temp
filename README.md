@@ -1,12 +1,13 @@
 # dlrm_embedding_temp
 
-## generate dataset from scratch
+## Generate dataset from scratch
 
 - sample.py is used to shuffle data based on batch and stores in 5M indices files.
   command `python3 sample.py 0.8 embedding_bag/fbgemm_t856_bs65536_x.pt` will genetate several files in folder sample_x. The sample rate is configrable( In this cacse is 0.8, which means 80% of 65536 bacthes in sythetic dataset) 
   
 - optgen.py is used to generate training data for cache model and prefetch model
   command `python optgen.py 0.1 embedding_bag/sample_X/dataset_x_sampled_80_N` will generate several files in forder sample_x_cached_10. The cache size of Belady's algorithm is configurable. (In this case is 0.1, which means 10% of unique indices number is configed as cache size )
+  For fast data generation, we can use `bash optgen.sh` to generate tens of training data files simultaneously. 
   
 ## Cache model
 To train cache model, simplyly use command `python3 train.py --config=example_caching.json --traceFile=dataset/sample_0 --model_type=0` with example dataset. We use CorssEntropyLoss for binary classification
