@@ -102,7 +102,7 @@ def run(traceFile, model_type):
     config["gpu"] = torch.cuda.is_available()
     input_sequence_length = config["n_channels"]
     evaluation_windown_length = config["evaluation_window"]
-
+    BATCHSIZE = config["batch_size"]
 
 
     inputsfolder = traceFile
@@ -152,21 +152,21 @@ def run(traceFile, model_type):
         trace = np.loadtxt(d, dtype=float)
         gt_trace = trace[:len(block_trace),1]
 
-        
+        FLAGS.train_size = len(gt_trace)
         assert(len(gt_trace) == len(block_trace))
 
         if model_type==1:
             train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length)
-            model = seq2seq_prefetch(config, train_set)
+            model = seq2seq_prefetch(config) 
+            train_loader = DataLoader(train_set, batch_size=BATCHSIZE, shuffle=False, collate_fn=None, drop_last=True)
+   
         else:
             train_set = MyDataset_cache(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length)
             model = seq2seq_cache(config, train_set)
         # Train
         print("==> Start training ...")
-        model.git()
+        model.train()
 
-        # Prediction
-        y_pred = model.test()
 
         
         if USE_CUDA:

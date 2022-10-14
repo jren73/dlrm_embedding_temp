@@ -19,5 +19,5 @@
     "attention_mlp_pre": false,
     "learning_rate": 0.001,
     "gpu": false,
-    "loss": "Intersection_over_Union"
+    "loss": "corr"
   }

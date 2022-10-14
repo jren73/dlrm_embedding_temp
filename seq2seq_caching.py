@@ -190,10 +190,12 @@ class seq2seq_cache(nn.Module):
         y = []
 
         for i in self.dataset:
-            X.append(i[0])
-            y.append(i[1])
+            X.append(torch.tensor(i[0]))
+            y.append(torch.tensor(i[1]))
             #print(i[0], i[1])
 
+        self.X = torch.stack(X)
+        self.y = torch.stack(y)
         if config.get('loss') == 'cross_entropy':
             self.loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)
             config['loss'] = 'cross_entropy'
@@ -208,7 +210,7 @@ class seq2seq_cache(nn.Module):
             'cuda:0' if torch.cuda.is_available() else 'cpu')
         print("==> Use accelerator: ", self.device)
 
-        self.Encoder = Encoder(input_size=X.shape[1],
+        self.Encoder = Encoder(input_size=self.X.shape[1],
                                encoder_num_hidden=self.encoder_num_hidden,
                                T=self.T).to(self.device)
         self.Decoder = Decoder(encoder_num_hidden=self.encoder_num_hidden,
@@ -218,10 +220,7 @@ class seq2seq_cache(nn.Module):
         # Loss function
         self.criterion = nn.MSELoss()
 
-        if self.parallel:
-            self.encoder = nn.DataParallel(self.encoder)
-            self.decoder = nn.DataParallel(self.decoder)
-
+        
         self.encoder_optimizer = optim.Adam(params=filter(lambda p: p.requires_grad,
                                                           self.Encoder.parameters()),
                                             lr=self.learning_rate)
