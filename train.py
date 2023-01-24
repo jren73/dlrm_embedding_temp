@@ -263,7 +263,7 @@ def run(traceFile, model_type):
 
         
         
-        '''
+        
         # Optimizer
         optimizer = torch.optim.Adam(model.parameters(), lr=config.get("learning_rate", .001))
 
@@ -307,7 +307,7 @@ def run(traceFile, model_type):
             model = seq2seq_prefetch
         model.load_state_dict(torch.load(PATH))
     evaluate(model, eval_loader)
-    '''
+    
 
     
     
