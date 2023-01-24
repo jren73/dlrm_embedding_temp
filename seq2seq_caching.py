@@ -26,7 +26,7 @@ class Encoder(nn.Module):
    
     def forward(self, x):
        
-        #x = x.reshape((1, self.seq_len, self.n_features))
+        x = x.reshape((1, self.seq_len, self.n_features))
         
         h_1 = Variable(torch.zeros(
             self.num_layers, x.size(0), self.hidden_dim).to(device))
