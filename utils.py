@@ -243,30 +243,35 @@ class MyDataset_prefetch(data.Dataset):
 
 class MyDataset_cache(data.Dataset):
 
-    def __init__(self, sample, groundtruth, input_sequence=10,evaluation_window=10):
-        self.sample = sample
-        self.groundtruth = groundtruth
+    def __init__(self, sample, groundtruth, seq_length=20):
+        mean = sample.mean()
+        stdev = sample.std()
+
+        self.sample = torch.tensor((sample- mean) / stdev).float()
+        self.groundtruth = torch.tensor(groundtruth).float()
         self.max = max(np.max(sample),np.max(groundtruth))
-        print(input_sequence, evaluation_window)
-        assert(input_sequence == evaluation_window)
-        self.set = [self._sample(idx,input_sequence,evaluation_window) for idx in range(0, len(self.sample), input_sequence)]
-        #self.set = [self._test(idx,input_sequence,evaluation_window) for idx in range(0, len(self.sample), input_sequence)]
+        assert(len(sample) == len(groundtruth))
+        self.set = [self.sample, self.groundtruth]
+        self.sequence_length = seq_length
+        
         
 
     def __len__(self):
-        return len(self.set)
+        return len(self.sample)
 
     def __getitem__(self, item):
-        return self.set[item]
+        if item >= self.sequence_length - 1:
+            i_start = item - self.sequence_length + 1
+            x = self.sample[i_start:(item + 1)]
+            y = self.groundtruth[i_start:(item + 1)]
+        else:
+            padding = torch.zeros(self.sequence_length - item - 1)
+            x = self.sample[0:(item + 1)]
+            x = torch.cat((padding, x), 0)
+            y = self.groundtruth[0:(item + 1)]
+            y = torch.cat((padding, y), 0)
 
-    def _sample(self, idx, sample_length, gt_length):
-        #data_X = torch.tensor(self.sample[idx])
-        #target_Y = torch.tensor(self.groundtruth[idx])
-        #print(idx)
-        if len(self.sample) < idx+sample_length:
-            return
-        x = self.sample[idx:idx+sample_length]
-        y = self.groundtruth[idx:idx+sample_length]
-       
-        return x,y
+        return x, y
+
+  
 

@@ -5,355 +5,211 @@ import numpy as np
 
 from torch import nn
 from torch import optim
-from iou_loss import iou_accuracy,Chamfer1DLoss
 from torch.autograd import Variable
 import torch.nn.functional as F
 
 
 class Encoder(nn.Module):
-
-    def __init__(self, T,
-                 input_size,
-                 encoder_num_hidden,
-                 parallel=False):
-        """Initialize an encoder ."""
+    def __init__(self, seq_len, n_features, embedding_dim=64):
         super(Encoder, self).__init__()
-        self.encoder_num_hidden = encoder_num_hidden
-        self.input_size = input_size
-        self.parallel = parallel
-        self.T = T
 
-        
-        self.encoder_lstm = nn.LSTM(
-            input_size=self.input_size,
-            hidden_size=self.encoder_num_hidden,
-            num_layers=1
+        self.seq_len, self.n_features = seq_len, n_features
+        self.embedding_dim, self.hidden_dim = embedding_dim,  embedding_dim
+        self.num_layers = 3
+        self.rnn1 = nn.LSTM(
+          input_size=n_features,
+          hidden_size=self.hidden_dim,
+          num_layers=3,
+          batch_first=True,
+          dropout = 0.35
         )
-
+   
+    def forward(self, x):
        
-        self.encoder_attn = nn.Linear(
-            in_features=2 * self.encoder_num_hidden + self.T - 1,
-            out_features=1
-        )
-
-    def forward(self, X):
-        """forward.
-
-        Args:
-            X: input data
-
-        """
-        X_tilde = Variable(X.data.new(
-            X.size(0), self.T - 1, self.input_size).zero_())
-        X_encoded = Variable(X.data.new(
-            X.size(0), self.T - 1, self.encoder_num_hidden).zero_())
-
-        # Eq. 8, parameters not in nn.Linear but to be learnt
-        # v_e = torch.nn.Parameter(data=torch.empty(
-        #     self.input_size, self.T).uniform_(0, 1), requires_grad=True)
-        # U_e = torch.nn.Parameter(data=torch.empty(
-        #     self.T, self.T).uniform_(0, 1), requires_grad=True)
-
-        # h_n, s_n: initial states with dimention hidden_size
-        h_n = self._init_states(X)
-        s_n = self._init_states(X)
-
-        for t in range(self.T - 1):
-            # batch_size * input_size * (2 * hidden_size + T - 1)
-            x = torch.cat((h_n.repeat(self.input_size, 1, 1).permute(1, 0, 2),
-                           s_n.repeat(self.input_size, 1, 1).permute(1, 0, 2),
-                           X.permute(0, 2, 1)), dim=2)
-
-            x = self.encoder_attn(
-                x.view(-1, self.encoder_num_hidden * 2 + self.T - 1))
-
-            # get weights by softmax
-            alpha = F.softmax(x.view(-1, self.input_size), dim=1)
-
-            # get new input for LSTM
-            x_tilde = torch.mul(alpha, X[:, t, :])
-
-            # Fix the warning about non-contiguous memory
-            # https://discuss.pytorch.org/t/dataparallel-issue-with-flatten-parameter/8282
-            self.encoder_lstm.flatten_parameters()
-
-            # encoder LSTM
-            _, final_state = self.encoder_lstm(
-                x_tilde.unsqueeze(0), (h_n, s_n))
-            h_n = final_state[0]
-            s_n = final_state[1]
-
-            X_tilde[:, t, :] = x_tilde
-            X_encoded[:, t, :] = h_n
-
-        return X_tilde, X_encoded
-
-    def _init_states(self, X):
-        """Initialize all 0 hidden states and cell states for encoder."""
-        # https://pytorch.org/docs/master/nn.html?#lstm
-        return Variable(X.data.new(1, X.size(0), self.encoder_num_hidden).zero_())
+        #x = x.reshape((1, self.seq_len, self.n_features))
+        
+        h_1 = Variable(torch.zeros(
+            self.num_layers, x.size(0), self.hidden_dim).to(device))
+         
+        
+        c_1 = Variable(torch.zeros(
+            self.num_layers, x.size(0), self.hidden_dim).to(device))
+              
+        x, (hidden, cell) = self.rnn1(x,(h_1, c_1))
+        
+        
+        #return hidden_n.reshape((self.n_features, self.embedding_dim))
+        return hidden , cell 
 
 
 class Decoder(nn.Module):
-
-    def __init__(self, T, decoder_num_hidden, encoder_num_hidden):
-        """Initialize a decoder."""
+    def __init__(self, seq_len, input_dim=64, n_features=1):
         super(Decoder, self).__init__()
-        self.decoder_num_hidden = decoder_num_hidden
-        self.encoder_num_hidden = encoder_num_hidden
-        self.T = T
 
-        self.attn_layer = nn.Sequential(
-            nn.Linear(2 * decoder_num_hidden +
-                      encoder_num_hidden, encoder_num_hidden),
-            nn.Tanh(),
-            nn.Linear(encoder_num_hidden, 1)
-        )
-        self.lstm_layer = nn.LSTM(
-            input_size=1,
-            hidden_size=decoder_num_hidden
-        )
-        self.fc = nn.Linear(encoder_num_hidden + 1, 1)
-        self.fc_final = nn.Linear(decoder_num_hidden + encoder_num_hidden, 1)
-
-        self.fc.weight.data.normal_()
-
-    def forward(self, X_encoded, y_prev):
-        """forward."""
-        d_n = self._init_states(X_encoded)
-        c_n = self._init_states(X_encoded)
-
-        for t in range(self.T - 1):
-
-            x = torch.cat((d_n.repeat(self.T - 1, 1, 1).permute(1, 0, 2),
-                           c_n.repeat(self.T - 1, 1, 1).permute(1, 0, 2),
-                           X_encoded), dim=2)
-
-            beta = F.softmax(self.attn_layer(
-                x.view(-1, 2 * self.decoder_num_hidden + self.encoder_num_hidden)).view(-1, self.T - 1), dim=1)
-
-            # Eqn. 14: compute context vector
-            # batch_size * encoder_hidden_size
-            context = torch.bmm(beta.unsqueeze(1), X_encoded)[:, 0, :]
-            if t < self.T - 1:
-                # Eqn. 15
-                # batch_size * 1
-                y_tilde = self.fc(
-                    torch.cat((context, y_prev[:, t].unsqueeze(1)), dim=1))
-
-                # Eqn. 16: LSTM
-                self.lstm_layer.flatten_parameters()
-                _, final_states = self.lstm_layer(
-                    y_tilde.unsqueeze(0), (d_n, c_n))
-
-                d_n = final_states[0]  # 1 * batch_size * decoder_num_hidden
-                c_n = final_states[1]  # 1 * batch_size * decoder_num_hidden
-
-        # Eqn. 22: final output
-        y_pred = self.fc_final(torch.cat((d_n[0], context), dim=1))
-
-        return y_pred
-
-    def _init_states(self, X):
-        """Initialize all 0 hidden states and cell states for encoder."""
-        # hidden state and cell state [num_layers*num_directions, batch_size, hidden_size]
-        # https://pytorch.org/docs/master/nn.html?#lstm
-        return Variable(X.data.new(1, X.size(0), self.decoder_num_hidden).zero_())
-
-
-class seq2seq_cache(nn.Module):
-    """
-        Sequence to sequence module
-    """
-
-    def __init__(self, config,dataset):#(self, X, y, T,
-                 #encoder_num_hidden,
-                 #decoder_num_hidden,
-                 #batch_size,
-                 #learning_rate,
-                 #epochs,
-                 #parallel=False):
-                
-        """initialization."""
-        super(seq2seq_cache, self).__init__()
-        self.config = config
-        self.encoder_num_hidden = config.get("encoder_hidden")
-        self.decoder_num_hidden = config.get("decoder_hidden")
-        self.learning_rate = config.get("learning_rate")
-        self.batch_size = config.get("batch_size")
-        self.shuffle = False
-
-        self.T = config.get("n_channels")
-        self.dataset = dataset
-
-        X = []
-        y = []
-
-        for i in self.dataset:
-            X.append(torch.tensor(i[0]))
-            y.append(torch.tensor(i[1]))
-            #print(i[0], i[1])
-
-        self.X = torch.stack(X)
-        self.y = torch.stack(y)
-        if config.get('loss') == 'cross_entropy':
-            self.loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)
-            config['loss'] = 'cross_entropy'
-        else:
-            print("wrong loss configuration")
-        self.loss_type = config['loss']
-        print(config)
-
+        self.seq_len, self.input_dim = seq_len, input_dim
+        self.hidden_dim, self.n_features =  input_dim, n_features
         
-
-        self.device = torch.device(
-            'cuda:0' if torch.cuda.is_available() else 'cpu')
-        print("==> Use accelerator: ", self.device)
-
-        self.Encoder = Encoder(input_size=self.X.shape[1],
-                               encoder_num_hidden=self.encoder_num_hidden,
-                               T=self.T).to(self.device)
-        self.Decoder = Decoder(encoder_num_hidden=self.encoder_num_hidden,
-                               decoder_num_hidden=self.decoder_num_hidden,
-                               T=self.T).to(self.device)
-
-        # Loss function
-        self.criterion = nn.MSELoss()
-
+        self.rnn1 = nn.LSTM(
+          input_size=n_features,
+          hidden_size=input_dim,
+          num_layers=3,
+          batch_first=True,
+          dropout = 0.35
+        )
         
-        self.encoder_optimizer = optim.Adam(params=filter(lambda p: p.requires_grad,
-                                                          self.Encoder.parameters()),
-                                            lr=self.learning_rate)
-        self.decoder_optimizer = optim.Adam(params=filter(lambda p: p.requires_grad,
-                                                          self.Decoder.parameters()),
-                                            lr=self.learning_rate)
+        
+      
+        self.output_layer = nn.Linear(self.hidden_dim, n_features)
 
-        # Training set
-        self.train_timesteps = int(self.X.shape[0] * 0.7)
-        self.y = self.y - np.mean(self.y[:self.train_timesteps])
-        self.input_size = self.X.shape[1]
+    def forward(self, x,input_hidden,input_cell):
+       
+       
+        x = x.reshape((1,1,self.n_features ))
+        #print("decode input",x.size())
+             
+
+        x, (hidden_n, cell_n) = self.rnn1(x,(input_hidden,input_cell))
     
+        x = self.output_layer(x)
+        return x, hidden_n, cell_n
 
-    def train(self):
-        """Training process."""
-        iter_per_epoch = int(
-            np.ceil(self.train_timesteps * 1. / self.batch_size))
-        self.iter_losses = np.zeros(self.epochs * iter_per_epoch)
-        self.epoch_losses = np.zeros(self.epochs)
+class Attention(nn.Module):
+    def __init__(self, enc_hid_dim, dec_hid_dim):
+        super().__init__()
+        
+        self.attn = nn.Linear((enc_hid_dim ) + dec_hid_dim, dec_hid_dim)
+        self.v = nn.Linear(dec_hid_dim, 1, bias = False)
+        
+    def forward(self, hidden, encoder_outputs):
+        
+        #hidden = [batch size, dec hid dim]
+        #encoder_outputs = [src len, batch size, enc hid dim * 2]
+        
+        batch_size = encoder_outputs.shape[0]
+        src_len = encoder_outputs.shape[1]
+        
+       
+        hidden = hidden[2:3,:,:]
+        
+        #print("hidden size is",hidden.size())
+        
+        
+        
+        #repeat decoder hidden state src_len times
+        #hidden = hidden.unsqueeze(1).repeat(1, src_len, 1)
+        hidden = hidden.repeat(1, src_len, 1)
+     
+        
+        #encoder_outputs = encoder_outputs.permute(1, 0, 2)
+        
+        #print("encode_outputs size after permute is:",encoder_outputs.size())
+        
+        
+        #hidden = [batch size, src len, dec hid dim]
+        #encoder_outputs = [batch size, src len, enc hid dim * 2]
+        
+        energy = torch.tanh(self.attn(torch.cat((hidden, encoder_outputs), dim = 2))) 
+        
+        #energy = [batch size, src len, dec hid dim]
 
-        n_iter = 0
+        attention = self.v(energy).squeeze(2)
+        
+        #attention= [batch size, src len]
+        
+        
+        return F.softmax(attention, dim=1)
 
-        for epoch in range(self.epochs):
-            if self.shuffle:
-                ref_idx = np.random.permutation(self.train_timesteps - self.T)
-            else:
-                ref_idx = np.array(range(self.train_timesteps - self.T))
 
-            idx = 0
+class AttentionDecoder(nn.Module):
+    def __init__(self, seq_len,attention, input_dim=64, n_features=1,encoder_hidden_state = 512):
+        super(AttentionDecoder, self).__init__()
 
-            while (idx < self.train_timesteps):
-                # get the indices of X_train
-                indices = ref_idx[idx:(idx + self.batch_size)]
-                # x = np.zeros((self.T - 1, len(indices), self.input_size))
-                x = np.zeros((len(indices), self.T - 1, self.input_size))
-                y_prev = np.zeros((len(indices), self.T - 1))
-                y_gt = self.y[indices + self.T]
+        self.seq_len, self.input_dim = seq_len, input_dim
+        self.hidden_dim, self.n_features =  input_dim, n_features
+        self.attention = attention 
+        
+        self.rnn1 = nn.LSTM(
+          #input_size=1,
+          input_size= encoder_hidden_state + 1,  # Encoder Hidden State + One Previous input
+          hidden_size=input_dim,
+          num_layers=3,
+          batch_first=True,
+          dropout = 0.35
+        )
+        
+        
+      
+        self.output_layer = nn.Linear(self.hidden_dim * 2 , n_features)
 
-                # format x into 3D tensor
-                for bs in range(len(indices)):
-                    x[bs, :, :] = self.X[indices[bs]:(
-                        indices[bs] + self.T - 1), :]
-                    y_prev[bs, :] = self.y[indices[bs]: (indices[bs] + self.T - 1)]
+    def forward(self, x,input_hidden,input_cell,encoder_outputs):
+       
+        a = self.attention(input_hidden, encoder_outputs)
+        
+        a = a.unsqueeze(1)
+        
+        #a = [batch size, 1, src len]
+        
+        #encoder_outputs = encoder_outputs.permute(1, 0, 2)
+        
+        #encoder_outputs = [batch size, src len, enc hid dim * 2]
+        
+      
+        
+        weighted = torch.bmm(a, encoder_outputs)
+        
+        
+     
+        x = x.reshape((1,1,1))
+       
+        
+        
+        rnn_input = torch.cat((x, weighted), dim = 2)
+       
 
-                loss = self.train_forward(x, y_prev, y_gt)
-                self.iter_losses[int(
-                    epoch * iter_per_epoch + idx / self.batch_size)] = loss
+        #x, (hidden_n, cell_n) = self.rnn1(x,(input_hidden,input_cell))
+        x, (hidden_n, cell_n) = self.rnn1(rnn_input,(input_hidden,input_cell))
+        
+        output = x.squeeze(0)
+        weighted = weighted.squeeze(0)
+        
+        x = self.output_layer(torch.cat((output, weighted), dim = 1))
+        return x, hidden_n, cell_n
 
-                idx += self.batch_size
-                n_iter += 1
 
-                if n_iter % 10000 == 0 and n_iter != 0:
-                    for param_group in self.encoder_optimizer.param_groups:
-                        param_group['lr'] = param_group['lr'] * 0.9
-                    for param_group in self.decoder_optimizer.param_groups:
-                        param_group['lr'] = param_group['lr'] * 0.9
+class Seq2Seq_cache(nn.Module):
 
-                self.epoch_losses[epoch] = np.mean(self.iter_losses[range(
-                    epoch * iter_per_epoch, (epoch + 1) * iter_per_epoch)])
+    def __init__(self, seq_len, n_features, embedding_dim=64,output_length = 28):
+        super(Seq2Seq_cache, self).__init__()
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        print("device is:",device)
+        
+        self.encoder = Encoder(seq_len, n_features, embedding_dim).to(device)
+        self.attention = Attention(512,512)
+        self.output_length = output_length
+        self.decoder = AttentionDecoder(seq_len, self.attention, embedding_dim, n_features).to(device)
+        
 
-            if epoch % 10 == 0:
-                print("Epochs: ", epoch, " Iterations: ", n_iter,
-                      " Loss: ", self.epoch_losses[epoch])
+    def forward(self, x):
+        
+        encoder_output,hidden,cell = self.encoder(x)
+         
+        #Prepare place holder for decoder output
+        targets_ta = []
+        #prev_output become the next input to the LSTM cell
+        prev_output = x
+        
+        #itearate over LSTM - according to the required output days
+        for out_days in range(self.output_length) :
+        
+            prev_x,prev_hidden,prev_cell = self.decoder(prev_output,hidden,cell,encoder_output)
+            hidden,cell = prev_hidden,prev_cell
+            prev_output = prev_x
+            
+            targets_ta.append(prev_x.reshape(1))
+           
+            
+        
+        
+        targets = torch.stack(targets_ta)
 
-            if epoch % 10 == 0:
-                y_train_pred = self.test(on_train=True)
-                y_test_pred = self.test(on_train=False)
-                y_pred = np.concatenate((y_train_pred, y_test_pred))
-                plt.ioff()
-                plt.figure()
-                plt.plot(range(1, 1 + len(self.y)), self.y, label="True")
-                plt.plot(range(self.T, len(y_train_pred) + self.T),
-                         y_train_pred, label='Predicted - Train')
-                plt.plot(range(self.T + len(y_train_pred), len(self.y) + 1),
-                         y_test_pred, label='Predicted - Test')
-                plt.legend(loc='upper left')
-                plt.show()
-
-    def train_forward(self, X, y_prev, y_gt):
-        """Forward pass."""
-        # zero gradients
-        self.encoder_optimizer.zero_grad()
-        self.decoder_optimizer.zero_grad()
-
-        input_weighted, input_encoded = self.Encoder(
-            Variable(torch.from_numpy(X).type(torch.FloatTensor).to(self.device)))
-        y_pred = self.Decoder(input_encoded, Variable(
-            torch.from_numpy(y_prev).type(torch.FloatTensor).to(self.device)))
-
-        y_true = Variable(torch.from_numpy(
-            y_gt).type(torch.FloatTensor).to(self.device))
-
-        y_true = y_true.view(-1, 1)
-        loss = self.criterion(y_pred, y_true)
-        loss.backward()
-
-        self.encoder_optimizer.step()
-        self.decoder_optimizer.step()
-
-        return loss.item()
-
-    def test(self, on_train=False):
-        """Prediction."""
-
-        if on_train:
-            y_pred = np.zeros(self.train_timesteps - self.T + 1)
-        else:
-            y_pred = np.zeros(self.X.shape[0] - self.train_timesteps)
-
-        i = 0
-        while i < len(y_pred):
-            batch_idx = np.array(range(len(y_pred)))[i: (i + self.batch_size)]
-            X = np.zeros((len(batch_idx), self.T - 1, self.X.shape[1]))
-            y_history = np.zeros((len(batch_idx), self.T - 1))
-
-            for j in range(len(batch_idx)):
-                if on_train:
-                    X[j, :, :] = self.X[range(
-                        batch_idx[j], batch_idx[j] + self.T - 1), :]
-                    y_history[j, :] = self.y[range(
-                        batch_idx[j], batch_idx[j] + self.T - 1)]
-                else:
-                    X[j, :, :] = self.X[range(
-                        batch_idx[j] + self.train_timesteps - self.T, batch_idx[j] + self.train_timesteps - 1), :]
-                    y_history[j, :] = self.y[range(
-                        batch_idx[j] + self.train_timesteps - self.T, batch_idx[j] + self.train_timesteps - 1)]
-
-            y_history = Variable(torch.from_numpy(
-                y_history).type(torch.FloatTensor).to(self.device))
-            _, input_encoded = self.Encoder(
-                Variable(torch.from_numpy(X).type(torch.FloatTensor).to(self.device)))
-            y_pred[i:(i + self.batch_size)] = self.Decoder(input_encoded,
-                                                           y_history).cpu().data.numpy()[:, 0]
-            i += self.batch_size
-
-        return y_pred
+        return targets

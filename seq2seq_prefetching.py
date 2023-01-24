@@ -1,4 +1,4 @@
-from sklearn.semi_supervised import LabelSpreading
+#from sklearn.semi_supervised import LabelSpreading
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
