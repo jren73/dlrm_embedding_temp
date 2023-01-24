@@ -298,7 +298,7 @@ def run(traceFile, model_type):
             PATH = "prefetch_model.pt"
         
         # Save
-        torch.save(net.state_dict(), PATH)
+        torch.save(model.state_dict(), PATH)
 
         # Load
         if model_type ==0:

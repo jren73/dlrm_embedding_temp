@@ -64,7 +64,7 @@ class Decoder(nn.Module):
     def forward(self, x,input_hidden,input_cell):
        
        
-        #x = x.reshape((1,1,self.n_features ))
+        x = x.reshape((1,1,self.n_features ))
         #print("decode input",x.size())
              
 
