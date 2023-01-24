@@ -38,13 +38,13 @@ def init_weights(m):
         nn.init.uniform_(param.data, -0.08, 0.08)
 
 def train_model(model, train_loader,val_load,seq_length, n_epochs):
-  
+    
     #history = dict(train=[], val=[])
 
     #best_model_wts = copy.deepcopy(model.state_dict())
     #best_loss = 10000.0
     #mb = master_bar(range(1, n_epochs + 1))
-
+    
     for epoch in range(n_epochs):
         model = model.train()
 
@@ -164,7 +164,7 @@ def evaluate(model, eval_loader):
 
 
 def run(traceFile, model_type):
-
+    USE_CUDA = 1
     config_path = FLAGS.config
 
     if not os.path.exists(config_path):
@@ -286,7 +286,7 @@ def run(traceFile, model_type):
             run_state = (epoch, FLAGS.epochs, FLAGS.train_size)
 
             # Train needs to return model and optimizer, otherwise the model keeps restarting from zero at every epoch
-            model, optimizer = train(model, optimizer, train_loader, run_state)
+            #model, optimizer = train(model, optimizer, train_loader, run_state)
             #evaluate(model, eval_loader)
 
 
@@ -296,7 +296,7 @@ def run(traceFile, model_type):
             PATH = "cache_model.pt"
         else:
             PATH = "prefetch_model.pt"
-
+        
         # Save
         torch.save(net.state_dict(), PATH)
 
@@ -306,6 +306,7 @@ def run(traceFile, model_type):
         else:
             model = seq2seq_prefetch
         model.load_state_dict(torch.load(PATH))
+        
     evaluate(model, eval_loader)
     
 
