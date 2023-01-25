@@ -182,6 +182,7 @@ class Seq2Seq_cache(nn.Module):
         super(Seq2Seq_cache, self).__init__()
         
         
+        
         self.encoder = Encoder(seq_len, n_features, embedding_dim).to(device)
         self.attention = Attention(512,512)
         self.output_length = output_length

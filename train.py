@@ -160,7 +160,7 @@ def evaluate(model, eval_loader):
 '''
 
 def run(traceFile, model_type):
-    USE_CUDA = 1
+    USE_CUDA = 0
     config_path = FLAGS.config
 
     if not os.path.exists(config_path):
