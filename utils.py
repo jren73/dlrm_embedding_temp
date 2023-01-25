@@ -244,11 +244,11 @@ class MyDataset_prefetch(data.Dataset):
 class MyDataset_cache(data.Dataset):
 
     def __init__(self, sample, groundtruth, seq_length=20):
-        mean = sample.mean()
-        stdev = sample.std()
+        mean = sample[0:10000].mean()
+        stdev = sample[0:10000].std()
 
-        self.sample = torch.tensor((sample- mean) / stdev).float()
-        self.groundtruth = torch.tensor(groundtruth).float()
+        self.sample = torch.tensor((sample[0:10000]- mean) / stdev).float()
+        self.groundtruth = torch.tensor(groundtruth[0:10000]).float()
         self.max = max(np.max(sample),np.max(groundtruth))
         assert(len(sample) == len(groundtruth))
         self.set = [self.sample, self.groundtruth]

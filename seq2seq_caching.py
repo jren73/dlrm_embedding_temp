@@ -8,6 +8,9 @@ from torch import optim
 from torch.autograd import Variable
 import torch.nn.functional as F
 
+#device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+device = 'cpu'
+print("device is:",device)
 
 class Encoder(nn.Module):
     def __init__(self, seq_len, n_features, embedding_dim=64):
@@ -39,8 +42,7 @@ class Encoder(nn.Module):
         
         
         #return hidden_n.reshape((self.n_features, self.embedding_dim))
-        return hidden , cell 
-
+        return x, hidden , cell 
 
 class Decoder(nn.Module):
     def __init__(self, seq_len, input_dim=64, n_features=1):
@@ -157,9 +159,9 @@ class AttentionDecoder(nn.Module):
         
         weighted = torch.bmm(a, encoder_outputs)
         
-        
+        print(weighted.size())
      
-        x = x.reshape((1,1,1))
+        x = x.reshape((1,1,5))
        
         
         
@@ -180,8 +182,7 @@ class Seq2Seq_cache(nn.Module):
 
     def __init__(self, seq_len, n_features, embedding_dim=64,output_length = 28):
         super(Seq2Seq_cache, self).__init__()
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        print("device is:",device)
+        
         
         self.encoder = Encoder(seq_len, n_features, embedding_dim).to(device)
         self.attention = Attention(512,512)

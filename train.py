@@ -37,8 +37,7 @@ def init_weights(m):
     for name, param in m.named_parameters():
         nn.init.uniform_(param.data, -0.08, 0.08)
 
-def train_model(model, train_loader,val_load,seq_length, n_epochs):
-    
+def train_model(model, trian_set,seq_length, n_epochs):
     #history = dict(train=[], val=[])
 
     #best_model_wts = copy.deepcopy(model.state_dict())
@@ -49,15 +48,19 @@ def train_model(model, train_loader,val_load,seq_length, n_epochs):
         model = model.train()
 
         train_losses = []
-        for j,data in enumerate(train_loader):
-            trainX = Variable(torch.Tensor(data))
-            trainy = Variable(torch.Tensor(j))
-            y_pred = model(trainX)
-            loss = criterion(y_pred, trainy)
-            loss.backward()
-            optimizer.step()
-            if i%50 == 0:
-                print(i,"th iteration : ",loss)
+        j,data =  trian_set[20]
+        print(j)
+        print(data)
+        trainX = Variable(torch.Tensor(data))
+        trainy = Variable(torch.Tensor(j))
+        y_pred = model(trainX)
+        loss = criterion(y_pred, trainy)
+        loss.backward()
+        print(loss)
+        break
+        optimizer.step()
+        if i%50 == 0:
+            print(i,"th iteration : ",loss)
             #seq_inp = TrainX[i,:,:].to(device)
             #seq_true = Trainy[i,:,:].to(device)
             #features = train_features[i,:,:].to(device)
@@ -134,6 +137,7 @@ def train(model, optimizer, train_loader, state):
     # print(" End of training:  loss={:05.3f} , cer={:03.1f}".format(np.mean(losses), np.mean(cers)*100))
 
 
+'''
 def evaluate(model, eval_loader):
 
     losses = []
@@ -161,10 +165,10 @@ def evaluate(model, eval_loader):
     # fig.savefig("data/att.png")
     print("  End of evaluation : loss {:05.3f} , acc {:03.1f}".format(np.mean(losses), np.mean(accs)))
     # return {'loss': np.mean(losses), 'cer': np.mean(accs)*100}
-
+'''
 
 def run(traceFile, model_type):
-    USE_CUDA = 1
+    USE_CUDA = 0
     config_path = FLAGS.config
 
     if not os.path.exists(config_path):
@@ -180,7 +184,8 @@ def run(traceFile, model_type):
     if model_type == 1:
         model = seq2seq_prefetch(config)
     else:
-        model = Seq2Seq_cache(input_sequence_length, input_sequence_length, 512)
+        model = Seq2Seq_cache(input_sequence_length, 1, 512, input_sequence_length)
+                               
         if USE_CUDA:
             model = model.cuda()
         print(model)
@@ -245,20 +250,23 @@ def run(traceFile, model_type):
         else:
             
             train_set = MyDataset_cache(gt_trace[:],block_trace[:],input_sequence_length)
-            print(train_set[20])
-            train_loader = DataLoader(train_set, batch_size=3, shuffle=False, collate_fn=None, drop_last=True)
+            #print(train_set[20])
+            #train_loader = DataLoader(train_set, batch_size=3, shuffle=False, collate_fn=None, drop_last=True)
             '''
             print("========")
             for i, batch in enumerate(train_loader):
                 print(i, batch)
             
                 print("~~~~~~~~~")
-            return
+                break
+            #return
             '''
             
             # Train
             print("==> Start training caching model ... with datafile " + output_trace)
-            train_model(model, train_loader,train_loader,input_sequence_length, 1)
+            train_model(model, train_set,input_sequence_length, 1)
+            
+
 
 
         
@@ -296,18 +304,18 @@ def run(traceFile, model_type):
             PATH = "cache_model.pt"
         else:
             PATH = "prefetch_model.pt"
-        
+        '''
         # Save
         torch.save(model.state_dict(), PATH)
 
         # Load
         if model_type ==0:
-            model = seq2seq_cache()
+            model = Seq2Seq_cache()
         else:
             model = seq2seq_prefetch
         model.load_state_dict(torch.load(PATH))
-        
-    evaluate(model, eval_loader)
+        '''
+    #evaluate(model, train_loader)
     
 
     
@@ -319,6 +327,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', default=1, type=int)
     parser.add_argument('--traceFile', type=str,  help='trace file name\n')
     parser.add_argument('--model_type', default=1, type=int,  help='0 for caching model, 1 for prefetcing model\n')
+    parser.add_argument('--gpu_id', default=0, type=int,  help='idicate which gpu used for training\n')
     #parser.add_argument('--epochs', default=1200, type=int)
     #parser.add_argument('--train_size', default=4000000, type=int)
     #parser.add_argument('--eval_size', default=2600, type=int)
@@ -327,6 +336,7 @@ if __name__ == '__main__':
     FLAGS, _ = parser.parse_known_args()
     traceFile = FLAGS.traceFile
     model_type = FLAGS.model_type
+    gpu_id = FLAGS.model_type
     model = "cache" if model_type==0 else "prefetch"
 
     print("training " + model + " model with " + traceFile)
