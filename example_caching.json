@@ -1,7 +1,7 @@
 {
     "decoder": "Luong",
     "encoder": "RNN",
-    "n_channels": 5,
+    "n_channels": 25,
     "encoder_hidden": 50,
     "encoder_layers": 1,
     "encoder_dropout": 0.0,

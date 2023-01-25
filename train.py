@@ -17,6 +17,11 @@ from io import StringIO
 import torch.nn as nn
 from torch.autograd import Variable
 
+device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+print("device is:",device)
+processing_file=""
+history = dict(train=[], val=[])
+
 def grub_datafile(datafolder, inputsfolder, model_type=1):
     cache_trainingdata = datafolder+"/*cached_trace_opt.txt"
     prefetcher_trainingdata  = datafolder+"/*dataset_cache_miss_trace.txt"
@@ -34,31 +39,48 @@ def grub_datafile(datafolder, inputsfolder, model_type=1):
     return inputsfile, res
 
 def init_weights(m):
+    print("Initializing weights...")
     for name, param in m.named_parameters():
         nn.init.uniform_(param.data, -0.08, 0.08)
+def predict(x,y):
+    acc = 0
+    x = x.cpu().numpy()
+    y = y.cpu().numpy()
+    assert(len(x) == len(y))
+    for i in range(len(x)):
+        t=0
+        if x[i]>=0.5:
+            t=1
+        if t == y[i]:
+            acc = acc+1
+    return acc
 
-def train_model(model, train_set,seq_length, n_epochs):
-    #history = dict(train=[], val=[])
+
+
+def train_model(model, train_set,eval_set,seq_length, n_epochs):
+    #
 
     #best_model_wts = copy.deepcopy(model.state_dict())
     #best_loss = 10000.0
     #mb = master_bar(range(1, n_epochs + 1))
-    optimizer = torch.optim.Adam(model.parameters(), lr=4e-3,weight_decay=1e-5)
-    criterion = torch.nn.MSELoss().cuda()
+    optimizer = torch.optim.Adam(model.parameters(), lr=4e-3, weight_decay=1e-5)
+    criterion = torch.nn.BCEWithLogitsLoss().to(device)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max = 5e-3, eta_min=1e-8, last_epoch=-1)
     
     for epoch in range(n_epochs):
         model = model.train()
 
         train_losses = []
+        np.arange(seq_length, len(train_set), seq_length)
         for i in range(len(train_set)):
             data,j =  train_set[i]
-            trainX = Variable(torch.Tensor(data)).cuda()
-            trainy = Variable(torch.Tensor(j.view(seq_length,1))).cuda()
+            trainX = Variable(torch.Tensor(data)).to(device)
+            trainy = Variable(torch.Tensor(j)).to(device)
             optimizer.zero_grad()
             y_pred = model(trainX, trainX[-1])
-            assert(trainy.size()==y_pred.size())
-            loss = criterion(y_pred, trainy)
+            #print(y_pred)
+            #print(trainy.unsqueeze(1))
+            loss = criterion(y_pred, trainy.unsqueeze(1))
             #print(y_pred)
             #print(trainy)
             loss.backward()
@@ -67,41 +89,33 @@ def train_model(model, train_set,seq_length, n_epochs):
 
             train_losses.append(loss.item())
      
-            if i%50 == 0:
-                print(i,"th iteration : ",loss)
-               
+            if i%seq_length == 0:
+                print(i,"th iteration avg loss: ",np.mean(train_losses))
         
-        '''
         val_losses = []
+        val_accuracy = []
         model = model.eval()
         with torch.no_grad():
-            for i in progress_bar(range(validX.size()[0]),parent=mb):
-                seq_inp = ValidX[i,:,:].to(device)
-                seq_true = Validy[i,:,:].to(device)
-                features = valid_features[i,:,:].to(device)
-        
-                seq_pred = model(seq_inp,seq_inp[seq_length-1:seq_length,:],features)
-               
-
-                loss = criterion(seq_pred, seq_true)
+            for i in range(len(eval_set)):
+                data,j =  eval_set[i]
+                evalX = Variable(torch.Tensor(data)).to(device)
+                evaly = Variable(torch.Tensor(j)).to(device)
+                y_pred = model(evalX, evalX[-1])
+                loss = criterion(y_pred, evaly.unsqueeze(1))
                 val_losses.append(loss.item())
-        
+                accuracy = predict(y_pred, evaly.unsqueeze(1))
+                val_accuracy.append(accuracy)
+
+                if i%1 == 0:
+                    print("Evaluation - avg loss: ",np.mean(val_losses), "avg accuracy: ", np.mean(val_accuracy)/seq_length)
+
         train_loss = np.mean(train_losses)
         val_loss = np.mean(val_losses)
-
-        history['train'].append(train_loss)
-        history['val'].append(val_loss)
-
-        if val_loss < best_loss:
-            best_loss = val_loss
-            torch.save(model.state_dict(), 'best_model_n_features.pt')
-            print("saved best model epoch:",epoch,"val loss is:",val_loss)
-        
-        print(f'Epoch {epoch}: train loss {train_loss} val loss {val_loss}')
+        print("Finish processing ", processing_file)
         scheduler.step(val_loss)
-    #model.load_state_dict(best_model_wts)
-    return model.eval(), history
-    '''
+
+        return model.eval()
+
 def train(model, optimizer, train_loader, state):
     epoch, n_epochs, train_steps = state
 
@@ -160,7 +174,7 @@ def evaluate(model, eval_loader):
 '''
 
 def run(traceFile, model_type):
-    USE_CUDA = 0
+    #USE_CUDA = 0
     config_path = FLAGS.config
 
     if not os.path.exists(config_path):
@@ -178,8 +192,7 @@ def run(traceFile, model_type):
     else:
         model = Seq2Seq_cache(input_sequence_length, 1, 512, input_sequence_length)
                                
-        if USE_CUDA:
-            model = model.cuda()
+        model = model.to(device)
         print(model)
         model.apply(init_weights)
 
@@ -207,6 +220,7 @@ def run(traceFile, model_type):
             if dataset_id in ff:
                 input_trace = ff
         assert(input_trace != "")
+        processing_file = output_trace
         print("Processing "+ input_trace +" and " +output_trace)
         print("================================================\n")
         file = open(input_trace,mode='r')
@@ -240,74 +254,17 @@ def run(traceFile, model_type):
             
    
         else:
-            
-            train_set = MyDataset_cache(gt_trace[:],block_trace[:],input_sequence_length)
+            #data_len = len(gt_trace)
+            data_len = 1000
+            data_boundary = int(data_len*0.8)
+            train_set = MyDataset_cache(gt_trace[:data_boundary],block_trace[:data_boundary],input_sequence_length)
+            eval_set = MyDataset_cache(gt_trace[data_boundary:data_len],block_trace[data_boundary:data_len],input_sequence_length)
             #print(train_set[20])
             #train_loader = DataLoader(train_set, batch_size=3, shuffle=False, collate_fn=None, drop_last=True)
-            '''
-            print("========")
-            for i, batch in enumerate(train_loader):
-                print(i, batch)
-            
-                print("~~~~~~~~~")
-                break
-            #return
-            '''
             
             # Train
             print("==> Start training caching model ... with datafile " + output_trace)
-            train_model(model, train_set,input_sequence_length, 1)
-            
-
-
-
-        
-        
-        
-        # Optimizer
-        optimizer = torch.optim.Adam(model.parameters(), lr=config.get("learning_rate", .001))
-
-        print("=" * 60)
-        print(model)
-        print("=" * 60)
-        for k, v in sorted(config.items(), key=lambda i: i[0]):
-            print(" (" + k + ") : " + str(v))
-        print()
-        print("=" * 60)
-
-        print("\nInitializing weights...")
-        for name, param in model.named_parameters():
-            if 'bias' in name:
-                torch.nn.init.constant_(param, 0.0)
-            elif 'weight' in name:
-                torch.nn.init.xavier_normal_(param)
-
-        for epoch in range(FLAGS.epochs):
-            run_state = (epoch, FLAGS.epochs, FLAGS.train_size)
-
-            # Train needs to return model and optimizer, otherwise the model keeps restarting from zero at every epoch
-            #model, optimizer = train(model, optimizer, train_loader, run_state)
-            #evaluate(model, eval_loader)
-
-
-        PATH = ""
-
-        if model_type ==0:
-            PATH = "cache_model.pt"
-        else:
-            PATH = "prefetch_model.pt"
-        '''
-        # Save
-        torch.save(model.state_dict(), PATH)
-
-        # Load
-        if model_type ==0:
-            model = Seq2Seq_cache()
-        else:
-            model = seq2seq_prefetch
-        model.load_state_dict(torch.load(PATH))
-        '''
-    #evaluate(model, train_loader)
+            model = train_model(model, train_set, eval_set, input_sequence_length, 1)
     
 
     

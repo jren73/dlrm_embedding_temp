@@ -12,6 +12,10 @@
 ## Cache model
 To train cache model, simplyly use command `python3 train.py --config=example_caching.json --traceFile=dataset/sample_0 --model_type=0` with example dataset. We use CorssEntropyLoss for binary classification
 
+Change # of indices for training: line 258 and 259
+change report frequency: line 92 and 99
+
+
 ## Prefetch model
 To train prefetch model, use command `python3 train.py --config=example_prefetching.json --traceFile=dataset/sample_0 --model_type=1` with example dataset. We use customized Chamfer1DLoss in iou_loss.py
 
