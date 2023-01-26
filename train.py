@@ -16,11 +16,17 @@ import glob
 from io import StringIO
 import torch.nn as nn
 from torch.autograd import Variable
+import math
 
-device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-print("device is:",device)
-processing_file=""
-history = dict(train=[], val=[])
+def initial():
+    global history 
+    global device 
+    global processing_file
+
+    history = dict(train=[], val=[])
+    device = device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+    processing_file = ""
+
 
 def grub_datafile(datafolder, inputsfolder, model_type=1):
     cache_trainingdata = datafolder+"/*cached_trace_opt.txt"
@@ -42,6 +48,10 @@ def init_weights(m):
     print("Initializing weights...")
     for name, param in m.named_parameters():
         nn.init.uniform_(param.data, -0.08, 0.08)
+
+def sigmoid(x):
+  return 1 / (1 + math.exp(-x))
+
 def predict(x,y):
     acc = 0
     x = x.cpu().numpy()
@@ -49,17 +59,16 @@ def predict(x,y):
     assert(len(x) == len(y))
     for i in range(len(x)):
         t=0
-        if x[i]>=0.5:
+        if sigmoid(x[i])>=0.5:
             t=1
         if t == y[i]:
             acc = acc+1
-    return acc
+    return acc/len(x)
+
 
 
 
 def train_model(model, train_set,eval_set,seq_length, n_epochs):
-    #
-
     #best_model_wts = copy.deepcopy(model.state_dict())
     #best_loss = 10000.0
     #mb = master_bar(range(1, n_epochs + 1))
@@ -71,8 +80,8 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
         model = model.train()
 
         train_losses = []
-        np.arange(seq_length, len(train_set), seq_length)
-        for i in range(len(train_set)):
+        index = np.arange(seq_length, len(train_set), seq_length)
+        for i in index:
             data,j =  train_set[i]
             trainX = Variable(torch.Tensor(data)).to(device)
             trainy = Variable(torch.Tensor(j)).to(device)
@@ -89,14 +98,15 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
 
             train_losses.append(loss.item())
      
-            if i%seq_length == 0:
-                print(i,"th iteration avg loss: ",np.mean(train_losses))
+            if i%10000 == 0:
+                print(int(i/seq_length),"th iteration loss: ",loss.item(), ", avg loss: ", np.mean(train_losses))
         
         val_losses = []
         val_accuracy = []
         model = model.eval()
+        index = np.arange(seq_length, len(eval_set), seq_length)
         with torch.no_grad():
-            for i in range(len(eval_set)):
+            for i in index:
                 data,j =  eval_set[i]
                 evalX = Variable(torch.Tensor(data)).to(device)
                 evaly = Variable(torch.Tensor(j)).to(device)
@@ -106,14 +116,15 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
                 accuracy = predict(y_pred, evaly.unsqueeze(1))
                 val_accuracy.append(accuracy)
 
-                if i%1 == 0:
-                    print("Evaluation - avg loss: ",np.mean(val_losses), "avg accuracy: ", np.mean(val_accuracy)/seq_length)
+                if i%1000 == 0:
+                    print("Evaluation ", int(i/seq_length), "th iteration", "- avg loss: ",np.mean(val_losses), "avg accuracy: ", np.mean(val_accuracy))
 
         train_loss = np.mean(train_losses)
         val_loss = np.mean(val_losses)
         print("Finish processing ", processing_file)
         scheduler.step(val_loss)
-
+        history['train'].append(train_loss)
+        history['val'].append(val_loss)
         return model.eval()
 
 def train(model, optimizer, train_loader, state):
@@ -204,6 +215,7 @@ def run(traceFile, model_type):
     if not os.path.exists(datafolder):
         raise FileNotFoundError
     trace, res = grub_datafile(datafolder, inputsfolder, model_type)
+    trace.sort()
     print(res)
     print(trace)
     
@@ -255,7 +267,7 @@ def run(traceFile, model_type):
    
         else:
             #data_len = len(gt_trace)
-            data_len = 1000
+            data_len = 2500
             data_boundary = int(data_len*0.8)
             train_set = MyDataset_cache(gt_trace[:data_boundary],block_trace[:data_boundary],input_sequence_length)
             eval_set = MyDataset_cache(gt_trace[data_boundary:data_len],block_trace[data_boundary:data_len],input_sequence_length)
@@ -266,9 +278,52 @@ def run(traceFile, model_type):
             print("==> Start training caching model ... with datafile " + output_trace)
             model = train_model(model, train_set, eval_set, input_sequence_length, 1)
     
+    if model_type == 1:
+        torch.save(model.state_dict(), 'predict_model.pt')
+        
+    else:
+        torch.save(model.state_dict(), 'cache_model.pt')
+        
+    
+def inference(trace_file, model_type):
+    inf_seq_length = 25
+    print("Loading model...")
+    if model_type == 1:
+        model.load_state_dict(torch.load('predict_model.pt'))
+    else:
+        model = Seq2Seq_cache(inf_seq_length, 1, 512, inf_seq_length)                        
+        model = model.to(device)
+        model.load_state_dict(torch.load('cache_model.pt'))
+        
+    model.eval()
+    file = open(trace_file,mode='r')
 
+    # read all lines at once
+    all_of_it = file.read()
+
+    # close the file
+    file.close()
+    d = StringIO(all_of_it)
+    trace = np.loadtxt(d, dtype=float)
+    block_trace = trace[:,1]
+    inference_set = MyDataset_cache(block_trace[:],block_trace[:],inf_seq_length)
+    print("inferening input ", trace_file)
+    f = open("inference_result.txt", "w")
     
-    
+    index = np.arange(inf_seq_length, len(inference_set), inf_seq_length)
+    with torch.no_grad():    
+        for i in index:
+            data,j =  inference_set[i]
+            evalX = Variable(torch.Tensor(data)).to(device)
+            y_pred = model(evalX, evalX[-1])
+            x = y_pred.cpu().numpy()
+            for i in range(len(x)):
+                t=0
+                if sigmoid(x[i])>=0.5:
+                    t=1
+                f.write(str(t)+"\n")
+    f.close()
+    print("inference restults are in inference_result.txt")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -276,7 +331,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', default=1, type=int)
     parser.add_argument('--traceFile', type=str,  help='trace file name\n')
     parser.add_argument('--model_type', default=1, type=int,  help='0 for caching model, 1 for prefetcing model\n')
-    parser.add_argument('--gpu_id', default=0, type=int,  help='idicate which gpu used for training\n')
+    parser.add_argument('--infFile', type=str,  help='inference file name\n')
     #parser.add_argument('--epochs', default=1200, type=int)
     #parser.add_argument('--train_size', default=4000000, type=int)
     #parser.add_argument('--eval_size', default=2600, type=int)
@@ -285,9 +340,10 @@ if __name__ == '__main__':
     FLAGS, _ = parser.parse_known_args()
     traceFile = FLAGS.traceFile
     model_type = FLAGS.model_type
-    gpu_id = FLAGS.model_type
+    inferenceFile = FLAGS.infFile
+
     model = "cache" if model_type==0 else "prefetch"
-
     print("training " + model + " model with " + traceFile)
-
+    initial()
     run(traceFile, model_type)
+    inference(inferenceFile, model_type)
