@@ -10,7 +10,7 @@
   For fast data generation, we can use `bash optgen.sh` to generate tens of training data files simultaneously. 
   
 ## Cache model
-To train cache model, simplyly use command `python3 train.py --config=example_caching.json --traceFile=dataset/sample_0 --model_type=0` with example dataset. We use CorssEntropyLoss for binary classification
+To train cache model, simplyly use command `python3 train.py --config=example_caching.json --traceFile=dataset/sample_0 --model_type=0 --infFile=dataset/dataset_0_sampled_80_4_short.txt` with example dataset. We use CorssEntropyLoss for binary classification
 
 Change # of indices for training: line 258 and 259
 change report frequency: line 92 and 99

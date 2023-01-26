@@ -266,8 +266,8 @@ def run(traceFile, model_type):
             
    
         else:
-            #data_len = len(gt_trace)
-            data_len = 2500
+            data_len = len(gt_trace)
+            #data_len = 2500
             data_boundary = int(data_len*0.8)
             train_set = MyDataset_cache(gt_trace[:data_boundary],block_trace[:data_boundary],input_sequence_length)
             eval_set = MyDataset_cache(gt_trace[data_boundary:data_len],block_trace[data_boundary:data_len],input_sequence_length)
