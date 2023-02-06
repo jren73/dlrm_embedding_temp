@@ -75,7 +75,7 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
     optimizer = torch.optim.Adam(model.parameters(), lr=4e-3, weight_decay=1e-5)
     criterion = torch.nn.BCEWithLogitsLoss().to(device)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max = 5e-3, eta_min=1e-8, last_epoch=-1)
-    
+    f = open("training_result.txt", "a")
     for epoch in range(n_epochs):
         model = model.train()
 
@@ -98,9 +98,10 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
 
             train_losses.append(loss.item())
      
-            if i%10000 == 0:
-                print(int(i/seq_length),"th iteration loss: ",loss.item(), ", avg loss: ", np.mean(train_losses))
-        
+            if i%100000 == 0:
+                out_tmp = str(int(i/seq_length))+"th iteration loss: "+str(loss.item())+ ", avg loss: "+ str(np.mean(train_losses))
+                f.write(out_tmp +"\n")
+                print(out_tmp)
         val_losses = []
         val_accuracy = []
         model = model.eval()
@@ -116,8 +117,11 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
                 accuracy = predict(y_pred, evaly.unsqueeze(1))
                 val_accuracy.append(accuracy)
 
-                if i%1000 == 0:
-                    print("Evaluation ", int(i/seq_length), "th iteration", "- avg loss: ",np.mean(val_losses), "avg accuracy: ", np.mean(val_accuracy))
+                if i%4000 == 0:
+                    out_tmp = "Evaluation "+ str(int(i/seq_length))+ "th iteration - avg loss: "+ str(np.mean(val_losses))+ "avg accuracy: " + str(np.mean(val_accuracy))
+                    f.write(out_tmp +"\n")
+                    print(out_tmp)
+                    
 
         train_loss = np.mean(train_losses)
         val_loss = np.mean(val_losses)
@@ -125,6 +129,10 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
         scheduler.step(val_loss)
         history['train'].append(train_loss)
         history['val'].append(val_loss)
+        f.write(str(train_loss)+ "\n")
+        f.write(str(val_loss)+"\n")
+        f.write("~~~~~~~~~~~~~~~~~~~~\n\n\n")
+        f.close()
         return model.eval()
 
 def train(model, optimizer, train_loader, state):
