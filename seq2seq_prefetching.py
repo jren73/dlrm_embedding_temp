@@ -38,7 +38,7 @@ def skip_add_pyramid(x, seq_len, skip_add="add"):
 class EncoderRNN(nn.Module):
     def __init__(self, config):
         super(EncoderRNN, self).__init__()
-        self.input_size = config["n_channels"]
+        self.input_size = config["input_sequence_length"]
         self.hidden_size = config["encoder_hidden"]
         self.layers = config.get("encoder_layers", 1)
         self.dnn_layers = config.get("encoder_dnn_layers", 0)

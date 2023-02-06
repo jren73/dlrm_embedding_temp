@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import tqdm
 import torch.nn.functional as F
 from seq2seq_prefetching import seq2seq_prefetch
-from seq2seq_caching import Seq2Seq_cache
 from torch.utils.data import DataLoader
 from utils import prepare_data, MyDataset_cache, MyDataset_prefetch
 import pandas as pd
@@ -68,7 +67,7 @@ def predict(x,y):
 
 
 
-
+'''
 def train_model(model, train_set,eval_set,seq_length, n_epochs):
     #best_model_wts = copy.deepcopy(model.state_dict())
     #best_loss = 10000.0
@@ -135,7 +134,7 @@ def train_model(model, train_set,eval_set,seq_length, n_epochs):
         f.write("~~~~~~~~~~~~~~~~~~~~\n\n\n")
         f.close()
         return model.eval()
-
+'''
 def train(model, optimizer, train_loader, state):
     epoch, n_epochs, train_steps = state
 
@@ -209,7 +208,7 @@ def run(traceFile, model_type):
     batch_size = config["batch_size"]
     n_epochs = config["epochs"]
 
-    model = Seq2Seq_cache(input_sequence_length, 1, 512, input_sequence_length)
+    model = seq2seq_prefetch(config)
     model = model.to(device)
     print(model)
     if model_type == 1:
@@ -270,11 +269,13 @@ def run(traceFile, model_type):
         FLAGS.train_size = len(gt_trace)
         assert(len(gt_trace) == len(block_trace))
 
-        if model_type==1:
-            train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length) 
-            train_loader = DataLoader(train_set, batch_size=BATCHSIZE, shuffle=False, collate_fn=None, drop_last=True)
-            
-   
+       
+        train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length) 
+        train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=False, collate_fn=None, drop_last=True)
+        for i in train_loader:
+                print(i)
+                break
+        '''
         else:
             data_len = len(gt_trace)
             #data_len = 2500
@@ -285,25 +286,18 @@ def run(traceFile, model_type):
             #train_loader = DataLoader(train_set, batch_size=3, shuffle=False, collate_fn=None, drop_last=True)
             
             # Train
-            print("==> Start training caching model ... with datafile " + output_trace)
-            model = train_model(model, train_set, eval_set, input_sequence_length, 1)
-    
-    if model_type == 1:
+            print("==> Start training prefetch model ... with datafile " + output_trace)
+            model = train(model, train_set, eval_set, input_sequence_length, 1)
+        '''
         torch.save(model.state_dict(), 'predict_model.pt')
         
-    else:
-        torch.save(model.state_dict(), 'cache_model.pt')
-        
     
-def inference(trace_file, model_type):
+def inference(trace_file):
     inf_seq_length = 25
     print("Loading model...")
-    if model_type == 1:
-        model.load_state_dict(torch.load('predict_model.pt'))
-    else:
-        model = Seq2Seq_cache(inf_seq_length, 1, 512, inf_seq_length)                        
-        model = model.to(device)
-        model.load_state_dict(torch.load('cache_model.pt'))
+
+    model.load_state_dict(torch.load('predict_model.pt'))
+ 
         
     model.eval()
     file = open(trace_file,mode='r')
@@ -364,4 +358,4 @@ if __name__ == '__main__':
 
     initial()
     run(traceFile, model_type)
-    inference(inferenceFile, model_type)
+    inference(inferenceFile)
