@@ -202,18 +202,19 @@ def run(traceFile, model_type):
 
     with open(config_path, "r") as f:
         config = json.load(f)
-    config["gpu"] = torch.cuda.is_available()
-    input_sequence_length = config["n_channels"]
-    evaluation_windown_length = config["evaluation_window"]
-    BATCHSIZE = config["batch_size"]
 
+    config["gpu"] = torch.cuda.is_available()
+    input_sequence_length = config["input_sequence_length"]
+    evaluation_windown_length = config["evaluation_window"]
+    batch_size = config["batch_size"]
+    n_epochs = config["epochs"]
+
+    model = Seq2Seq_cache(input_sequence_length, 1, 512, input_sequence_length)
+    model = model.to(device)
+    print(model)
     if model_type == 1:
-        model = seq2seq_prefetch(config)
+        model.load_state_dict(torch.load('predict_model.pt'))
     else:
-        model = Seq2Seq_cache(input_sequence_length, 1, 512, input_sequence_length)
-                               
-        model = model.to(device)
-        print(model)
         model.apply(init_weights)
 
     inputsfolder = traceFile
@@ -362,5 +363,5 @@ if __name__ == '__main__':
     print("training prefetching model with " + traceFile + " from " + model)
 
     initial()
-    #run(traceFile, model_type)
+    run(traceFile, model_type)
     inference(inferenceFile, model_type)
