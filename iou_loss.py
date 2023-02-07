@@ -4,7 +4,9 @@ import numpy as np
 import torch.nn as nn
 import sys
 
-### useless python version, need to update
+
+### todo meaningless in python version. Add accuracy count here.
+
 # PyTroch version
 class iou_accuracy(nn.Module):
     def __init__(self):
