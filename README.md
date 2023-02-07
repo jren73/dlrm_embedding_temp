@@ -1,15 +1,15 @@
 # dlrm_embedding_temp
 
-
-├── models                                               # model chk (train cache model and prefetch model pt file)
-├── results                                              # training process intermediate result
-├── datasets                                             # processed sythtic dataset
-├── prepare_data                                         # Generate dataset from scratch
-├── simulator                                            # simulate different caching behavior
-├── train_cahing.py and seq2seq_caching.py               # caching model
-├── train_prefetching.py and seq2seq_prefetching.py      # Prefetching model
-├── prepare_data                                         # Generate dataset from scratc
-└── README.md
+   .
+   ├── models                                               # model chk (train cache model and prefetch model pt file)
+   ├── results                                              # training process intermediate result
+   ├── datasets                                             # processed sythtic dataset
+   ├── prepare_data                                         # Generate dataset from scratch
+   ├── simulator                                            # simulate different caching behavior
+   ├── train_cahing.py and seq2seq_caching.py               # caching model
+   ├── train_prefetching.py and seq2seq_prefetching.py      # Prefetching model
+   ├── prepare_data                                         # Generate dataset from scratch
+   └── README.md
 
 
 ## Train cache model from scratch
