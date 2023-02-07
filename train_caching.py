@@ -291,11 +291,11 @@ def run(traceFile, model_type):
         
     
 def inference(trace_file, model_type):
-    inf_seq_length = 25
+    inf_seq_length = 500
     print("Loading model...")
     model = Seq2Seq_cache(inf_seq_length, 1, 512, inf_seq_length)                        
     model = model.to(device)
-    model.load_state_dict(torch.load('cache_model.pt'))
+    model.load_state_dict(torch.load('models/cache_model.pt'))
         
     model.eval()
     file = open(trace_file,mode='r')
@@ -343,5 +343,5 @@ if __name__ == '__main__':
     model = "cache" if model_type==0 else "prefetch"
     print("training " + model + " model with " + traceFile)
     initial()
-    run(traceFile, model_type)
+    #run(traceFile, model_type)
     inference(inferenceFile, model_type)
