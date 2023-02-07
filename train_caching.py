@@ -285,23 +285,17 @@ def run(traceFile, model_type):
             # Train
             print("==> Start training caching model ... with datafile " + output_trace)
             model = train_model(model, train_set, eval_set, input_sequence_length, 1)
-    
-    if model_type == 1:
-        torch.save(model.state_dict(), 'predict_model.pt')
-        
-    else:
-        torch.save(model.state_dict(), 'cache_model.pt')
+    ## need to add loss figure draw
+    ## need to make sure the chk has better quality?
+    torch.save(model.state_dict(), 'cache_model.pt')
         
     
 def inference(trace_file, model_type):
     inf_seq_length = 25
     print("Loading model...")
-    if model_type == 1:
-        model.load_state_dict(torch.load('predict_model.pt'))
-    else:
-        model = Seq2Seq_cache(inf_seq_length, 1, 512, inf_seq_length)                        
-        model = model.to(device)
-        model.load_state_dict(torch.load('cache_model.pt'))
+    model = Seq2Seq_cache(inf_seq_length, 1, 512, inf_seq_length)                        
+    model = model.to(device)
+    model.load_state_dict(torch.load('cache_model.pt'))
         
     model.eval()
     file = open(trace_file,mode='r')
