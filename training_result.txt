@@ -1,0 +1,792 @@
+4000th iteration loss: 0.3673829436302185, avg loss: 0.27331050012305785
+4000th iteration loss: 0.3658328652381897, avg loss: 0.2817371138825838
+8000th iteration loss: 0.5053773522377014, avg loss: 0.3494587186199642
+12000th iteration loss: 0.5236506462097168, avg loss: 0.39809207436369615
+16000th iteration loss: 0.37415167689323425, avg loss: 0.4354631702195984
+20000th iteration loss: 0.7400637865066528, avg loss: 0.46185792834300665
+24000th iteration loss: 0.9890048503875732, avg loss: 0.48953826949398593
+28000th iteration loss: 0.30078747868537903, avg loss: 0.511745780740744
+32000th iteration loss: 0.6655446290969849, avg loss: 0.530523240487626
+36000th iteration loss: 1.2136385440826416, avg loss: 0.5444306743066959
+40000th iteration loss: 1.0049500465393066, avg loss: 0.5566885621157096
+44000th iteration loss: 0.9387536644935608, avg loss: 0.5670962407665661
+48000th iteration loss: 0.5532345175743103, avg loss: 0.5775911972120399
+52000th iteration loss: 0.5113430023193359, avg loss: 0.5874466469502502
+56000th iteration loss: 0.32260382175445557, avg loss: 0.5955210068936722
+60000th iteration loss: 0.29021766781806946, avg loss: 0.5836136509705518
+64000th iteration loss: 0.46335887908935547, avg loss: 0.5707944149604653
+68000th iteration loss: 0.4625787138938904, avg loss: 0.5662903983745893
+72000th iteration loss: 0.640110433101654, avg loss: 0.5659250779853406
+76000th iteration loss: 0.3342556059360504, avg loss: 0.5663250246742689
+80000th iteration loss: 0.6553228497505188, avg loss: 0.5683908213268288
+84000th iteration loss: 0.5022620558738708, avg loss: 0.5709833407680901
+88000th iteration loss: 0.5262231826782227, avg loss: 0.5740085443810854
+92000th iteration loss: 1.0711418390274048, avg loss: 0.5779600679085345
+96000th iteration loss: 0.7431501746177673, avg loss: 0.5817134635948769
+100000th iteration loss: 0.7098188400268555, avg loss: 0.585249996316835
+104000th iteration loss: 0.6624075174331665, avg loss: 0.5889142808033653
+108000th iteration loss: 0.6968216300010681, avg loss: 0.592503330848966
+112000th iteration loss: 0.3803933560848236, avg loss: 0.5960779171939872
+116000th iteration loss: 0.5537400245666504, avg loss: 0.6000602224082139
+120000th iteration loss: 0.7414136528968811, avg loss: 0.6034880119253974
+124000th iteration loss: 0.7111921310424805, avg loss: 0.6071192280310446
+128000th iteration loss: 0.49998465180397034, avg loss: 0.6107603970468422
+132000th iteration loss: 0.5489665269851685, avg loss: 0.6143226990783106
+136000th iteration loss: 0.8222205638885498, avg loss: 0.6172891339951495
+140000th iteration loss: 0.787225604057312, avg loss: 0.620455495056571
+144000th iteration loss: 0.6862354874610901, avg loss: 0.6230477469630823
+148000th iteration loss: 0.8148779273033142, avg loss: 0.6259230158773099
+152000th iteration loss: 0.7033710479736328, avg loss: 0.6285992351158252
+156000th iteration loss: 0.9777947664260864, avg loss: 0.6309184627448494
+Evaluation 160th iteration - avg loss: 0.7181838974356651avg accuracy: 0.5832499999999999
+Evaluation 320th iteration - avg loss: 0.7321451072581112avg accuracy: 0.568
+Evaluation 480th iteration - avg loss: 0.7370542960241437avg accuracy: 0.56275
+Evaluation 640th iteration - avg loss: 0.7291873884852975avg accuracy: 0.571375
+Evaluation 800th iteration - avg loss: 0.7344175266847014avg accuracy: 0.56545
+Evaluation 960th iteration - avg loss: 0.7326859793315331avg accuracy: 0.5674166666666667
+Evaluation 1120th iteration - avg loss: 0.7350979914090463avg accuracy: 0.5647857142857143
+Evaluation 1280th iteration - avg loss: 0.7292124110041186avg accuracy: 0.57128125
+Evaluation 1440th iteration - avg loss: 0.7300352476744189avg accuracy: 0.5704444444444445
+Evaluation 1600th iteration - avg loss: 0.7298616513423621avg accuracy: 0.570675
+Evaluation 1760th iteration - avg loss: 0.7300089234655553avg accuracy: 0.5705681818181818
+Evaluation 1920th iteration - avg loss: 0.7303492398311694avg accuracy: 0.5701666666666667
+Evaluation 2080th iteration - avg loss: 0.728236667210093avg accuracy: 0.5723846153846154
+Evaluation 2240th iteration - avg loss: 0.7313826703599521avg accuracy: 0.5689464285714286
+Evaluation 2400th iteration - avg loss: 0.7298656641195218avg accuracy: 0.5706166666666667
+Evaluation 2560th iteration - avg loss: 0.7310277382610366avg accuracy: 0.56940625
+Evaluation 2720th iteration - avg loss: 0.7247237381799256avg accuracy: 0.5762941176470588
+Evaluation 2880th iteration - avg loss: 0.7034494755272236avg accuracy: 0.5996111111111111
+Evaluation 3040th iteration - avg loss: 0.684437780954728avg accuracy: 0.6204473684210526
+Evaluation 3200th iteration - avg loss: 0.6674349814374avg accuracy: 0.639075
+Evaluation 3360th iteration - avg loss: 0.6518901832401752avg accuracy: 0.6561071428571429
+Evaluation 3520th iteration - avg loss: 0.6379441127350385avg accuracy: 0.6713863636363636
+Evaluation 3680th iteration - avg loss: 0.6251035747239772avg accuracy: 0.6854565217391304
+Evaluation 3840th iteration - avg loss: 0.6133230158127845avg accuracy: 0.6983645833333334
+Evaluation 4000th iteration - avg loss: 0.6025001665502787avg accuracy: 0.7102200000000001
+Evaluation 4160th iteration - avg loss: 0.5926446094464224avg accuracy: 0.7210192307692307
+Evaluation 4320th iteration - avg loss: 0.5835552860741262avg accuracy: 0.7309814814814816
+Evaluation 4480th iteration - avg loss: 0.5750728057431324avg accuracy: 0.7402767857142857
+Evaluation 4640th iteration - avg loss: 0.5671209450361544avg accuracy: 0.7489913793103449
+Evaluation 4800th iteration - avg loss: 0.5597618990515669avg accuracy: 0.7570583333333333
+Evaluation 4960th iteration - avg loss: 0.5528121279552579avg accuracy: 0.7646774193548388
+Evaluation 5120th iteration - avg loss: 0.5464372460264713avg accuracy: 0.7716640625
+Evaluation 5280th iteration - avg loss: 0.5403128356701046avg accuracy: 0.7783787878787879
+Evaluation 5440th iteration - avg loss: 0.5346757077338065avg accuracy: 0.7845588235294118
+Evaluation 5600th iteration - avg loss: 0.5292574436377202avg accuracy: 0.7904928571428572
+Evaluation 5760th iteration - avg loss: 0.5241888437161429avg accuracy: 0.7960416666666668
+Evaluation 5920th iteration - avg loss: 0.5193722764332149avg accuracy: 0.8013175675675674
+Evaluation 6080th iteration - avg loss: 0.5148332447058668avg accuracy: 0.8062894736842104
+Evaluation 6240th iteration - avg loss: 0.5106400007859636avg accuracy: 0.8108782051282052
+Evaluation 6400th iteration - avg loss: 0.5066688614338637avg accuracy: 0.81523125
+Evaluation 6560th iteration - avg loss: 0.5028392884107988avg accuracy: 0.8194268292682928
+Evaluation 6720th iteration - avg loss: 0.4991968295004751avg accuracy: 0.8234166666666668
+Evaluation 6880th iteration - avg loss: 0.4957066970249248avg accuracy: 0.8272441860465117
+Evaluation 7040th iteration - avg loss: 0.4923481608317657avg accuracy: 0.8309261363636363
+Evaluation 7200th iteration - avg loss: 0.4891881042677495avg accuracy: 0.8343944444444444
+Evaluation 7360th iteration - avg loss: 0.48617274203216254avg accuracy: 0.8377010869565217
+Evaluation 7520th iteration - avg loss: 0.4833058012768309avg accuracy: 0.840845744680851
+Evaluation 7680th iteration - avg loss: 0.480572560596435avg accuracy: 0.84384375
+Evaluation 7840th iteration - avg loss: 0.47791440883385283avg accuracy: 0.8467551020408164
+Evaluation 8000th iteration - avg loss: 0.4754276256673038avg accuracy: 0.849485
+Evaluation 8160th iteration - avg loss: 0.472893301054251avg accuracy: 0.8522647058823529
+Evaluation 8320th iteration - avg loss: 0.47062265848239454avg accuracy: 0.8547548076923077
+Evaluation 8480th iteration - avg loss: 0.4683786005062877avg accuracy: 0.8572122641509434
+Evaluation 8640th iteration - avg loss: 0.46612450591874893avg accuracy: 0.8596851851851852
+Evaluation 8800th iteration - avg loss: 0.46401786846870724avg accuracy: 0.8619954545454546
+Evaluation 8960th iteration - avg loss: 0.4620143869525886avg accuracy: 0.8641875000000001
+Evaluation 9120th iteration - avg loss: 0.460095101382518avg accuracy: 0.8662938596491229
+Evaluation 9280th iteration - avg loss: 0.4582961395993058avg accuracy: 0.8682629310344828
+Evaluation 9440th iteration - avg loss: 0.45647113905682907avg accuracy: 0.8702627118644068
+Evaluation 9600th iteration - avg loss: 0.4546738201007247avg accuracy: 0.8722333333333334
+Evaluation 9760th iteration - avg loss: 0.4530513245765059avg accuracy: 0.8740122950819673
+Evaluation 9920th iteration - avg loss: 0.45138145041682065avg accuracy: 0.875842741935484
+Evaluation 10080th iteration - avg loss: 0.44988657283108857avg accuracy: 0.8774801587301587
+Evaluation 10240th iteration - avg loss: 0.44833589464251417avg accuracy: 0.8791796875000001
+Evaluation 10400th iteration - avg loss: 0.4468998721585824avg accuracy: 0.8807499999999999
+Evaluation 10560th iteration - avg loss: 0.4454576222705796avg accuracy: 0.8823295454545456
+Evaluation 10720th iteration - avg loss: 0.4440721055103549avg accuracy: 0.8838470149253731
+Evaluation 10880th iteration - avg loss: 0.4426861174130703avg accuracy: 0.8853676470588234
+Evaluation 11040th iteration - avg loss: 0.44142543774746035avg accuracy: 0.8867500000000001
+Evaluation 11200th iteration - avg loss: 0.4402552737694766avg accuracy: 0.8880321428571429
+Evaluation 11360th iteration - avg loss: 0.43899196637925547avg accuracy: 0.889411971830986
+Evaluation 11520th iteration - avg loss: 0.4378390371075107avg accuracy: 0.8906701388888889
+Evaluation 11680th iteration - avg loss: 0.4366831227983922avg accuracy: 0.8919383561643836
+Evaluation 11840th iteration - avg loss: 0.4355829042583905avg accuracy: 0.8931452702702702
+Evaluation 12000th iteration - avg loss: 0.4345621542284886avg accuracy: 0.8942633333333333
+Evaluation 12160th iteration - avg loss: 0.43354195835019804avg accuracy: 0.8953815789473685
+Evaluation 12320th iteration - avg loss: 0.4325422088942164avg accuracy: 0.896474025974026
+Evaluation 12480th iteration - avg loss: 0.4315709818608295avg accuracy: 0.8975384615384617
+Evaluation 12640th iteration - avg loss: 0.4306883380571498avg accuracy: 0.898503164556962
+Evaluation 12800th iteration - avg loss: 0.42981573031516745avg accuracy: 0.8994593750000002
+Evaluation 12960th iteration - avg loss: 0.42889983954345avg accuracy: 0.9004660493827161
+Evaluation 13120th iteration - avg loss: 0.4279687480683007avg accuracy: 0.9014817073170731
+Evaluation 13280th iteration - avg loss: 0.42713161276271905avg accuracy: 0.9024006024096386
+Evaluation 13440th iteration - avg loss: 0.42635639428072386avg accuracy: 0.90325
+Evaluation 13600th iteration - avg loss: 0.42555128558593636avg accuracy: 0.9041352941176471
+Evaluation 13760th iteration - avg loss: 0.42477043740624604avg accuracy: 0.9049941860465117
+Evaluation 13920th iteration - avg loss: 0.4240116271265279avg accuracy: 0.9058275862068966
+Evaluation 14080th iteration - avg loss: 0.42325809183318847avg accuracy: 0.9066534090909091
+Evaluation 14240th iteration - avg loss: 0.4224849386726705avg accuracy: 0.9075
+Evaluation 14400th iteration - avg loss: 0.4217678137930731avg accuracy: 0.9082861111111111
+Evaluation 14560th iteration - avg loss: 0.421028791451929avg accuracy: 0.9090934065934066
+Evaluation 14720th iteration - avg loss: 0.4203554111978282avg accuracy: 0.9098315217391305
+Evaluation 14880th iteration - avg loss: 0.4197054168630031avg accuracy: 0.9105456989247314
+Evaluation 15040th iteration - avg loss: 0.4190058911793885avg accuracy: 0.9113111702127659
+Evaluation 15200th iteration - avg loss: 0.41836797991081287avg accuracy: 0.9120105263157896
+Evaluation 15360th iteration - avg loss: 0.4177863103686832avg accuracy: 0.9126510416666667
+Evaluation 15520th iteration - avg loss: 0.4171696251027824avg accuracy: 0.9133273195876289
+Evaluation 15680th iteration - avg loss: 0.41662296643480656avg accuracy: 0.913923469387755
+Evaluation 15840th iteration - avg loss: 0.41606250846890186avg accuracy: 0.914537878787879
+Evaluation 16000th iteration - avg loss: 0.4154629613608122avg accuracy: 0.915195
+Evaluation 16160th iteration - avg loss: 0.4149038067271951avg accuracy: 0.9158069306930693
+Evaluation 16320th iteration - avg loss: 0.41436277249572323avg accuracy: 0.9163995098039215
+Evaluation 16480th iteration - avg loss: 0.4138659123964246avg accuracy: 0.9169417475728157
+Evaluation 16640th iteration - avg loss: 0.4133415078959213avg accuracy: 0.917516826923077
+Evaluation 16800th iteration - avg loss: 0.4128678162129862avg accuracy: 0.9180333333333335
+Evaluation 16960th iteration - avg loss: 0.4123489917976395avg accuracy: 0.9186014150943397
+Evaluation 17120th iteration - avg loss: 0.41189055528630997avg accuracy: 0.9191028037383179
+Evaluation 17280th iteration - avg loss: 0.41139443404972553avg accuracy: 0.9196458333333334
+Evaluation 17440th iteration - avg loss: 0.4109707274038447avg accuracy: 0.9201100917431193
+Evaluation 17600th iteration - avg loss: 0.41051936304027387avg accuracy: 0.9206045454545455
+Evaluation 17760th iteration - avg loss: 0.41008079277166914avg accuracy: 0.9210855855855856
+Evaluation 17920th iteration - avg loss: 0.4096715877131958avg accuracy: 0.9215334821428572
+Evaluation 18080th iteration - avg loss: 0.4092152035407788avg accuracy: 0.922033185840708
+Evaluation 18240th iteration - avg loss: 0.40880164252594114avg accuracy: 0.9224846491228071
+Evaluation 18400th iteration - avg loss: 0.40837057869719423avg accuracy: 0.9229565217391306
+Evaluation 18560th iteration - avg loss: 0.4079808039943977avg accuracy: 0.923385775862069
+Evaluation 18720th iteration - avg loss: 0.40759373887513695avg accuracy: 0.9238076923076923
+Evaluation 18880th iteration - avg loss: 0.4072049413507773avg accuracy: 0.9242330508474579
+Evaluation 19040th iteration - avg loss: 0.406842738466666avg accuracy: 0.9246302521008405
+Evaluation 19200th iteration - avg loss: 0.4065273385293161avg accuracy: 0.9249770833333334
+Evaluation 19360th iteration - avg loss: 0.40612895850800285avg accuracy: 0.925413223140496
+Evaluation 19520th iteration - avg loss: 0.40582328942894447avg accuracy: 0.9257479508196722
+Evaluation 19680th iteration - avg loss: 0.4054828322742407avg accuracy: 0.9261239837398375
+Evaluation 19840th iteration - avg loss: 0.40514027116249407avg accuracy: 0.9265020161290324
+Evaluation 20000th iteration - avg loss: 0.4048161611780524avg accuracy: 0.9268560000000001
+Evaluation 20160th iteration - avg loss: 0.4044946564331887avg accuracy: 0.9272103174603176
+Evaluation 20320th iteration - avg loss: 0.4042082079150897avg accuracy: 0.9275255905511812
+Evaluation 20480th iteration - avg loss: 0.40391660592576956avg accuracy: 0.9278457031250001
+Evaluation 20640th iteration - avg loss: 0.40371781274849594avg accuracy: 0.928062015503876
+Evaluation 20800th iteration - avg loss: 0.4034174473096545avg accuracy: 0.9283923076923077
+Evaluation 20960th iteration - avg loss: 0.40313634469621734avg accuracy: 0.9286984732824429
+Evaluation 21120th iteration - avg loss: 0.4028246309368335avg accuracy: 0.9290397727272727
+Evaluation 21280th iteration - avg loss: 0.40251825736849606avg accuracy: 0.9293759398496242
+Evaluation 21440th iteration - avg loss: 0.40221244038374565avg accuracy: 0.9297108208955224
+Evaluation 21600th iteration - avg loss: 0.40193240290300714avg accuracy: 0.9300148148148148
+Evaluation 21760th iteration - avg loss: 0.4016673214021413avg accuracy: 0.9303033088235295
+Evaluation 21920th iteration - avg loss: 0.40140942715679423avg accuracy: 0.9305821167883211
+Evaluation 22080th iteration - avg loss: 0.40113339682879007avg accuracy: 0.9308858695652176
+Evaluation 22240th iteration - avg loss: 0.4009150084711129avg accuracy: 0.9311258992805757
+Evaluation 22400th iteration - avg loss: 0.40067754411005546avg accuracy: 0.9313857142857144
+Evaluation 22560th iteration - avg loss: 0.4003889708746727avg accuracy: 0.9317021276595745
+Evaluation 22720th iteration - avg loss: 0.40016955632165496avg accuracy: 0.9319419014084508
+Evaluation 22880th iteration - avg loss: 0.3999031946597087avg accuracy: 0.9322325174825177
+Evaluation 23040th iteration - avg loss: 0.3996881980694727avg accuracy: 0.9324704861111113
+Evaluation 23200th iteration - avg loss: 0.39948961375216985avg accuracy: 0.9326879310344828
+Evaluation 23360th iteration - avg loss: 0.3992564783763293avg accuracy: 0.932943493150685
+Evaluation 23520th iteration - avg loss: 0.39904702245099405avg accuracy: 0.9331717687074832
+Evaluation 23680th iteration - avg loss: 0.39884698712896255avg accuracy: 0.9333902027027027
+Evaluation 23840th iteration - avg loss: 0.39868084565805106avg accuracy: 0.9335721476510067
+Evaluation 24000th iteration - avg loss: 0.3984548426643014avg accuracy: 0.93382
+Evaluation 24160th iteration - avg loss: 0.39825077295574723avg accuracy: 0.9340447019867552
+Evaluation 24320th iteration - avg loss: 0.39804863188734374avg accuracy: 0.9342648026315791
+Evaluation 24480th iteration - avg loss: 0.39786657243967055avg accuracy: 0.9344656862745099
+Evaluation 24640th iteration - avg loss: 0.39767852057763314avg accuracy: 0.9346720779220781
+Evaluation 24800th iteration - avg loss: 0.39750533478514805avg accuracy: 0.9348645161290324
+Evaluation 24960th iteration - avg loss: 0.39733297316572413avg accuracy: 0.9350544871794872
+Evaluation 25120th iteration - avg loss: 0.3971079595517486avg accuracy: 0.9353009554140128
+Evaluation 25280th iteration - avg loss: 0.3969262527148652avg accuracy: 0.9355000000000001
+Evaluation 25440th iteration - avg loss: 0.39669431300845537avg accuracy: 0.9357531446540882
+Evaluation 25600th iteration - avg loss: 0.39656675734207963avg accuracy: 0.9358921875000001
+Evaluation 25760th iteration - avg loss: 0.39635937301476737avg accuracy: 0.9361180124223605
+Evaluation 25920th iteration - avg loss: 0.3962193660242598avg accuracy: 0.9362716049382718
+Evaluation 26080th iteration - avg loss: 0.39609780977565817avg accuracy: 0.9364079754601229
+Evaluation 26240th iteration - avg loss: 0.3959133865629754avg accuracy: 0.9366097560975611
+Evaluation 26400th iteration - avg loss: 0.3957785106935736avg accuracy: 0.9367575757575758
+Evaluation 26560th iteration - avg loss: 0.39559240536988677avg accuracy: 0.9369623493975905
+Evaluation 26720th iteration - avg loss: 0.3954402642581099avg accuracy: 0.9371287425149701
+Evaluation 26880th iteration - avg loss: 0.39529702734601285avg accuracy: 0.9372857142857144
+Evaluation 27040th iteration - avg loss: 0.3951504416477222avg accuracy: 0.9374467455621304
+Evaluation 27200th iteration - avg loss: 0.39500891857616166avg accuracy: 0.9376014705882354
+Evaluation 27360th iteration - avg loss: 0.3948892596575339avg accuracy: 0.9377353801169591
+Evaluation 27520th iteration - avg loss: 0.3947223528818942avg accuracy: 0.937918604651163
+Evaluation 27680th iteration - avg loss: 0.3946150572841309avg accuracy: 0.9380375722543355
+Evaluation 27840th iteration - avg loss: 0.3944750100235059avg accuracy: 0.9381925287356323
+Evaluation 28000th iteration - avg loss: 0.3943311262481979avg accuracy: 0.9383514285714287
+Evaluation 28160th iteration - avg loss: 0.39418662390248344avg accuracy: 0.9385113636363638
+Evaluation 28320th iteration - avg loss: 0.3940693024819517avg accuracy: 0.9386398305084747
+Evaluation 28480th iteration - avg loss: 0.3939521430321875avg accuracy: 0.9387654494382024
+Evaluation 28640th iteration - avg loss: 0.39384836744433843avg accuracy: 0.9388812849162013
+Evaluation 28800th iteration - avg loss: 0.393746685522298avg accuracy: 0.9389916666666668
+Evaluation 28960th iteration - avg loss: 0.3935904261177581avg accuracy: 0.9391643646408842
+Evaluation 29120th iteration - avg loss: 0.39348182989448144avg accuracy: 0.9392829670329672
+Evaluation 29280th iteration - avg loss: 0.3933572465431739avg accuracy: 0.939419398907104
+Evaluation 29440th iteration - avg loss: 0.3932190006619076avg accuracy: 0.9395706521739131
+Evaluation 29600th iteration - avg loss: 0.3931648595943241avg accuracy: 0.9396283783783785
+Evaluation 29760th iteration - avg loss: 0.39302172028029avg accuracy: 0.9397849462365593
+Evaluation 29920th iteration - avg loss: 0.39293351459869724avg accuracy: 0.9398823529411765
+Evaluation 30080th iteration - avg loss: 0.39282802929507293avg accuracy: 0.939997340425532
+Evaluation 30240th iteration - avg loss: 0.3927641641949772avg accuracy: 0.9400674603174605
+Evaluation 30400th iteration - avg loss: 0.3926681549807912avg accuracy: 0.9401710526315791
+Evaluation 30560th iteration - avg loss: 0.39254950992177917avg accuracy: 0.940301047120419
+Evaluation 30720th iteration - avg loss: 0.3925325764042403avg accuracy: 0.9403190104166668
+Evaluation 30880th iteration - avg loss: 0.39239954551093165avg accuracy: 0.9404637305699484
+Evaluation 31040th iteration - avg loss: 0.392350662178984avg accuracy: 0.9405180412371136
+Evaluation 31200th iteration - avg loss: 0.3922265614139346avg accuracy: 0.9406538461538462
+Evaluation 31360th iteration - avg loss: 0.3921632166799842avg accuracy: 0.9407232142857144
+Evaluation 31520th iteration - avg loss: 0.39206628083974726avg accuracy: 0.9408261421319798
+Evaluation 31680th iteration - avg loss: 0.39198549178080877avg accuracy: 0.9409141414141415
+Evaluation 31840th iteration - avg loss: 0.3919044716807841avg accuracy: 0.9410025125628142
+Evaluation 32000th iteration - avg loss: 0.3918163671437651avg accuracy: 0.9411000000000002
+Evaluation 32160th iteration - avg loss: 0.3917348239654258avg accuracy: 0.9411902985074628
+Evaluation 32320th iteration - avg loss: 0.3916491970180137avg accuracy: 0.9412834158415844
+Evaluation 32480th iteration - avg loss: 0.3915996957689597avg accuracy: 0.9413374384236454
+Evaluation 32640th iteration - avg loss: 0.39149708180213527avg accuracy: 0.9414485294117648
+Evaluation 32800th iteration - avg loss: 0.3914513413017479avg accuracy: 0.941498780487805
+Evaluation 32960th iteration - avg loss: 0.39135821930774783avg accuracy: 0.9416019417475728
+Evaluation 33120th iteration - avg loss: 0.3912703220746008avg accuracy: 0.9416968599033817
+Evaluation 33280th iteration - avg loss: 0.39117234732704953avg accuracy: 0.9418052884615385
+Evaluation 33440th iteration - avg loss: 0.3910782134748603avg accuracy: 0.941909090909091
+Evaluation 33600th iteration - avg loss: 0.39101734749174544avg accuracy: 0.941975
+Evaluation 33760th iteration - avg loss: 0.39095514816059884avg accuracy: 0.9420450236966825
+Evaluation 33920th iteration - avg loss: 0.39088593168395025avg accuracy: 0.942120283018868
+Evaluation 34080th iteration - avg loss: 0.39079719288056025avg accuracy: 0.9422171361502348
+Evaluation 34240th iteration - avg loss: 0.3907558284482318avg accuracy: 0.9422616822429907
+Evaluation 34400th iteration - avg loss: 0.39070770018062617avg accuracy: 0.9423139534883721
+Evaluation 34560th iteration - avg loss: 0.39062830915640073avg accuracy: 0.9423993055555556
+Evaluation 34720th iteration - avg loss: 0.3905602763007794avg accuracy: 0.9424735023041476
+Evaluation 34880th iteration - avg loss: 0.39052893792646465avg accuracy: 0.9425080275229358
+Evaluation 35040th iteration - avg loss: 0.3904575600667291avg accuracy: 0.9425856164383563
+Evaluation 35200th iteration - avg loss: 0.39039597799578174avg accuracy: 0.9426522727272727
+Evaluation 35360th iteration - avg loss: 0.39035825870374885avg accuracy: 0.942695701357466
+Evaluation 35520th iteration - avg loss: 0.3902792630599694avg accuracy: 0.9427815315315317
+Evaluation 35680th iteration - avg loss: 0.3902131331792193avg accuracy: 0.9428520179372197
+Evaluation 35840th iteration - avg loss: 0.39015656343960603avg accuracy: 0.9429162946428572
+Evaluation 36000th iteration - avg loss: 0.3901172728985548avg accuracy: 0.9429600000000001
+Evaluation 36160th iteration - avg loss: 0.3900276998082687avg accuracy: 0.9430575221238938
+Evaluation 36320th iteration - avg loss: 0.3899698190194132avg accuracy: 0.9431233480176213
+Evaluation 36480th iteration - avg loss: 0.38993659147894694avg accuracy: 0.9431589912280702
+Evaluation 36640th iteration - avg loss: 0.389903010692301avg accuracy: 0.9431954148471616
+Evaluation 36800th iteration - avg loss: 0.38983163425051avg accuracy: 0.9432728260869566
+Evaluation 36960th iteration - avg loss: 0.38976486828823237avg accuracy: 0.9433430735930738
+Evaluation 37120th iteration - avg loss: 0.38973466533653695avg accuracy: 0.9433771551724139
+Evaluation 37280th iteration - avg loss: 0.389670378434204avg accuracy: 0.9434463519313305
+Evaluation 37440th iteration - avg loss: 0.389666389208287avg accuracy: 0.9434519230769232
+Evaluation 37600th iteration - avg loss: 0.38960730041357433avg accuracy: 0.9435159574468086
+Evaluation 37760th iteration - avg loss: 0.38960909912978314avg accuracy: 0.9435148305084746
+Evaluation 37920th iteration - avg loss: 0.3895695361006172avg accuracy: 0.9435590717299579
+Evaluation 38080th iteration - avg loss: 0.38955118692628726avg accuracy: 0.9435787815126051
+Evaluation 38240th iteration - avg loss: 0.38949361764689494avg accuracy: 0.9436422594142261
+Evaluation 38400th iteration - avg loss: 0.38945920798073835avg accuracy: 0.9436822916666667
+Evaluation 38560th iteration - avg loss: 0.38941097658792223avg accuracy: 0.9437365145228217
+Evaluation 38720th iteration - avg loss: 0.3894173037052955avg accuracy: 0.9437303719008265
+Evaluation 38880th iteration - avg loss: 0.3894054409346463avg accuracy: 0.9437427983539095
+Evaluation 39040th iteration - avg loss: 0.38932706665736244avg accuracy: 0.9438299180327869
+Evaluation 39200th iteration - avg loss: 0.3893176491018765avg accuracy: 0.9438408163265307
+Evaluation 39360th iteration - avg loss: 0.3892923818825464avg accuracy: 0.9438668699186993
+Evaluation 39520th iteration - avg loss: 0.3892653929974567avg accuracy: 0.9438957489878543
+Evaluation 39680th iteration - avg loss: 0.3891932158265263avg accuracy: 0.9439747983870967
+Evaluation 39840th iteration - avg loss: 0.3891542161137883avg accuracy: 0.9440190763052209
+0.6335503210486757
+0.38913164972400643
+~~~~~~~~~~~~~~~~~~~~
+
+
+4000th iteration loss: 0.007459287531673908, avg loss: 0.042625131161568956
+8000th iteration loss: 0.010077680461108685, avg loss: 0.058264996085628296
+12000th iteration loss: 0.011271718889474869, avg loss: 0.07222487851651448
+16000th iteration loss: 0.029237747192382812, avg loss: 0.08307232995136771
+20000th iteration loss: 0.04060963913798332, avg loss: 0.09424972727354353
+24000th iteration loss: 0.1770058274269104, avg loss: 0.10373408154433636
+28000th iteration loss: 0.16864512860774994, avg loss: 0.11213069073065728
+32000th iteration loss: 0.013270226307213306, avg loss: 0.12056721147600587
+36000th iteration loss: 0.02476102113723755, avg loss: 0.1280817218390022
+40000th iteration loss: 0.17273101210594177, avg loss: 0.13584620013832496
+44000th iteration loss: 0.028713218867778778, avg loss: 0.1433298194512982
+48000th iteration loss: 0.02723838947713375, avg loss: 0.14986750630868356
+52000th iteration loss: 0.6135256290435791, avg loss: 0.15635935861622136
+56000th iteration loss: 0.03175017237663269, avg loss: 0.16262650779497506
+60000th iteration loss: 0.6403665542602539, avg loss: 0.16861487836801678
+64000th iteration loss: 0.523845911026001, avg loss: 0.1748665065299965
+68000th iteration loss: 0.1721673160791397, avg loss: 0.18044783683487334
+72000th iteration loss: 0.43814072012901306, avg loss: 0.18568511876844726
+76000th iteration loss: 0.16970622539520264, avg loss: 0.19146441427975183
+80000th iteration loss: 0.11874962598085403, avg loss: 0.19669613799699595
+84000th iteration loss: 0.4411047697067261, avg loss: 0.2018317601608791
+Evaluation 160th iteration - avg loss: 0.33522871519671754avg accuracy: 0.9212499999999999
+Evaluation 320th iteration - avg loss: 0.34733186842058783avg accuracy: 0.9182499999999999
+Evaluation 480th iteration - avg loss: 0.3520033467755032avg accuracy: 0.9170833333333334
+Evaluation 640th iteration - avg loss: 0.36336204812978395avg accuracy: 0.91425
+Evaluation 800th iteration - avg loss: 0.35586489957524464avg accuracy: 0.9161
+Evaluation 960th iteration - avg loss: 0.36729653778020294avg accuracy: 0.9132916666666666
+Evaluation 1120th iteration - avg loss: 0.358244152979127avg accuracy: 0.9155357142857143
+Evaluation 1280th iteration - avg loss: 0.36039991674915656avg accuracy: 0.9149999999999998
+Evaluation 1440th iteration - avg loss: 0.353301007744287avg accuracy: 0.91675
+Evaluation 1600th iteration - avg loss: 0.3557390665390994avg accuracy: 0.9161500000000001
+Evaluation 1760th iteration - avg loss: 0.35145355222577396avg accuracy: 0.9172272727272727
+Evaluation 1920th iteration - avg loss: 0.3572694927599514avg accuracy: 0.9157916666666668
+Evaluation 2080th iteration - avg loss: 0.3564807987351042avg accuracy: 0.9159807692307692
+Evaluation 2240th iteration - avg loss: 0.3588491737667937avg accuracy: 0.9153928571428571
+Evaluation 2400th iteration - avg loss: 0.35579494323891897avg accuracy: 0.9161500000000001
+Evaluation 2560th iteration - avg loss: 0.35313276146625866avg accuracy: 0.9168125
+Evaluation 2720th iteration - avg loss: 0.35441470123101576avg accuracy: 0.9165000000000001
+Evaluation 2880th iteration - avg loss: 0.35095126476436334avg accuracy: 0.9173611111111111
+Evaluation 3040th iteration - avg loss: 0.3528630613649607avg accuracy: 0.9168815789473684
+Evaluation 3200th iteration - avg loss: 0.35117606676416474avg accuracy: 0.9173
+Evaluation 3360th iteration - avg loss: 0.35169371613966566avg accuracy: 0.9171785714285715
+Evaluation 3520th iteration - avg loss: 0.3538927032411183avg accuracy: 0.9166363636363636
+Evaluation 3680th iteration - avg loss: 0.3540254312926782avg accuracy: 0.9165978260869565
+Evaluation 3840th iteration - avg loss: 0.3527694331797344avg accuracy: 0.91690625
+Evaluation 4000th iteration - avg loss: 0.3557186141605489avg accuracy: 0.9161800000000001
+Evaluation 4160th iteration - avg loss: 0.3577929728324167avg accuracy: 0.9156634615384615
+Evaluation 4320th iteration - avg loss: 0.3574810680566804avg accuracy: 0.9157407407407407
+Evaluation 4480th iteration - avg loss: 0.3583227561678671avg accuracy: 0.9155357142857143
+Evaluation 4640th iteration - avg loss: 0.3568764305966585avg accuracy: 0.915896551724138
+Evaluation 4800th iteration - avg loss: 0.35855058939545414avg accuracy: 0.9154833333333333
+Evaluation 4960th iteration - avg loss: 0.3579874676194102avg accuracy: 0.9156209677419356
+Evaluation 5120th iteration - avg loss: 0.3605948484655528avg accuracy: 0.9149765625
+Evaluation 5280th iteration - avg loss: 0.35915272729506603avg accuracy: 0.9153333333333333
+Evaluation 5440th iteration - avg loss: 0.35875271414612037avg accuracy: 0.9154264705882353
+Evaluation 5600th iteration - avg loss: 0.35955079336151746avg accuracy: 0.9152285714285715
+Evaluation 5760th iteration - avg loss: 0.3598102733906772avg accuracy: 0.9151597222222222
+Evaluation 5920th iteration - avg loss: 0.36141253058087536avg accuracy: 0.9147635135135135
+Evaluation 6080th iteration - avg loss: 0.36120876443272115avg accuracy: 0.9148157894736842
+Evaluation 6240th iteration - avg loss: 0.3624253615901137avg accuracy: 0.9145192307692308
+Evaluation 6400th iteration - avg loss: 0.36195161714509594avg accuracy: 0.9146375
+Evaluation 6560th iteration - avg loss: 0.36201577175255273avg accuracy: 0.9146219512195122
+Evaluation 6720th iteration - avg loss: 0.36203027444231944avg accuracy: 0.9146190476190476
+Evaluation 6880th iteration - avg loss: 0.36389386371498234avg accuracy: 0.914156976744186
+Evaluation 7040th iteration - avg loss: 0.3636087023261511avg accuracy: 0.9142272727272727
+Evaluation 7200th iteration - avg loss: 0.36288212447297863avg accuracy: 0.9144111111111112
+Evaluation 7360th iteration - avg loss: 0.36321531099231874avg accuracy: 0.9143260869565218
+Evaluation 7520th iteration - avg loss: 0.3624735211564644avg accuracy: 0.9145106382978725
+Evaluation 7680th iteration - avg loss: 0.3636593106171252avg accuracy: 0.9142187500000001
+Evaluation 7840th iteration - avg loss: 0.36412808620656023avg accuracy: 0.9141020408163265
+Evaluation 8000th iteration - avg loss: 0.3645871904240921avg accuracy: 0.91399
+Evaluation 8160th iteration - avg loss: 0.36536666762709213avg accuracy: 0.9137941176470588
+Evaluation 8320th iteration - avg loss: 0.36494983656381147avg accuracy: 0.9138990384615386
+Evaluation 8480th iteration - avg loss: 0.36557207528000946avg accuracy: 0.913745283018868
+Evaluation 8640th iteration - avg loss: 0.36569580855149847avg accuracy: 0.9137129629629631
+Evaluation 8800th iteration - avg loss: 0.3666791969336654avg accuracy: 0.9134727272727274
+Evaluation 8960th iteration - avg loss: 0.3656941102235578avg accuracy: 0.9137187500000001
+Evaluation 9120th iteration - avg loss: 0.3667564809065018avg accuracy: 0.9134561403508773
+Evaluation 9280th iteration - avg loss: 0.36616190017024375avg accuracy: 0.9136034482758623
+Evaluation 9440th iteration - avg loss: 0.3663147941022575avg accuracy: 0.913563559322034
+Evaluation 9600th iteration - avg loss: 0.3672319902456366avg accuracy: 0.9133333333333333
+Evaluation 9760th iteration - avg loss: 0.36814495210276277avg accuracy: 0.9131065573770494
+Evaluation 9920th iteration - avg loss: 0.36855120411041314avg accuracy: 0.9130040322580645
+Evaluation 10080th iteration - avg loss: 0.36900013378850877avg accuracy: 0.9128928571428573
+Evaluation 10240th iteration - avg loss: 0.36870169445246576avg accuracy: 0.9129687500000001
+Evaluation 10400th iteration - avg loss: 0.36738500038502164avg accuracy: 0.9132923076923078
+Evaluation 10560th iteration - avg loss: 0.3686452753880682avg accuracy: 0.9129810606060608
+Evaluation 10720th iteration - avg loss: 0.3682340519004084avg accuracy: 0.9130858208955225
+Evaluation 10880th iteration - avg loss: 0.3682820688054883avg accuracy: 0.9130735294117649
+Evaluation 11040th iteration - avg loss: 0.3698407872844879avg accuracy: 0.9126847826086957
+Evaluation 11200th iteration - avg loss: 0.36886544264553645avg accuracy: 0.9129250000000002
+Evaluation 11360th iteration - avg loss: 0.3689181756585653avg accuracy: 0.9129119718309859
+Evaluation 11520th iteration - avg loss: 0.3691183139452025avg accuracy: 0.9128611111111111
+Evaluation 11680th iteration - avg loss: 0.3691718108885067avg accuracy: 0.9128493150684933
+Evaluation 11840th iteration - avg loss: 0.3702344974756203avg accuracy: 0.9125844594594594
+Evaluation 12000th iteration - avg loss: 0.36922360660818715avg accuracy: 0.9128333333333334
+Evaluation 12160th iteration - avg loss: 0.3703129654589391avg accuracy: 0.9125625000000002
+Evaluation 12320th iteration - avg loss: 0.36989452218086544avg accuracy: 0.9126655844155845
+Evaluation 12480th iteration - avg loss: 0.3710874484935537avg accuracy: 0.912371794871795
+Evaluation 12640th iteration - avg loss: 0.37048176570023306avg accuracy: 0.9125221518987342
+Evaluation 12800th iteration - avg loss: 0.37058930426865117avg accuracy: 0.9124968750000001
+Evaluation 12960th iteration - avg loss: 0.3706152322683426avg accuracy: 0.9124907407407408
+Evaluation 13120th iteration - avg loss: 0.3698548021098803avg accuracy: 0.9126798780487805
+Evaluation 13280th iteration - avg loss: 0.37083111941037383avg accuracy: 0.9124397590361446
+Evaluation 13440th iteration - avg loss: 0.3697729204960134avg accuracy: 0.912702380952381
+Evaluation 13600th iteration - avg loss: 0.3706225226994823avg accuracy: 0.9124911764705883
+Evaluation 13760th iteration - avg loss: 0.37118921339279043avg accuracy: 0.9123517441860466
+Evaluation 13920th iteration - avg loss: 0.3719152466472955avg accuracy: 0.9121724137931037
+Evaluation 14080th iteration - avg loss: 0.3719590292418037avg accuracy: 0.912161931818182
+Evaluation 14240th iteration - avg loss: 0.3729679101053887avg accuracy: 0.9119101123595507
+Evaluation 14400th iteration - avg loss: 0.3726125853052104avg accuracy: 0.9119972222222222
+Evaluation 14560th iteration - avg loss: 0.3727586359710555avg accuracy: 0.9119615384615386
+Evaluation 14720th iteration - avg loss: 0.37301238907220186avg accuracy: 0.9118967391304348
+Evaluation 14880th iteration - avg loss: 0.37252610800675146avg accuracy: 0.9120161290322581
+Evaluation 15040th iteration - avg loss: 0.3731732460637973avg accuracy: 0.9118563829787235
+Evaluation 15200th iteration - avg loss: 0.37234590512136684avg accuracy: 0.9120605263157896
+Evaluation 15360th iteration - avg loss: 0.3730619681219347avg accuracy: 0.9118828125
+Evaluation 15520th iteration - avg loss: 0.37290793968263786avg accuracy: 0.9119201030927835
+Evaluation 15680th iteration - avg loss: 0.373685457635248avg accuracy: 0.9117270408163266
+Evaluation 15840th iteration - avg loss: 0.3733951140948891avg accuracy: 0.9117979797979798
+Evaluation 16000th iteration - avg loss: 0.37323364469851367avg accuracy: 0.9118375000000001
+Evaluation 16160th iteration - avg loss: 0.3729738432707698avg accuracy: 0.91190099009901
+Evaluation 16320th iteration - avg loss: 0.3732392667703714avg accuracy: 0.9118333333333335
+Evaluation 16480th iteration - avg loss: 0.37323045798835064avg accuracy: 0.9118349514563108
+Evaluation 16640th iteration - avg loss: 0.37315410696476015avg accuracy: 0.9118557692307694
+Evaluation 16800th iteration - avg loss: 0.37384126721338057avg accuracy: 0.9116857142857143
+Evaluation 16960th iteration - avg loss: 0.3738524089680484avg accuracy: 0.911683962264151
+Evaluation 17120th iteration - avg loss: 0.3744868724948561avg accuracy: 0.9115257009345795
+Evaluation 17280th iteration - avg loss: 0.37484744960869043avg accuracy: 0.9114375000000001
+Evaluation 17440th iteration - avg loss: 0.37494390751608997avg accuracy: 0.9114128440366973
+Evaluation 17600th iteration - avg loss: 0.3749191960067996avg accuracy: 0.9114181818181819
+Evaluation 17760th iteration - avg loss: 0.3756274074245756avg accuracy: 0.9112432432432434
+Evaluation 17920th iteration - avg loss: 0.3755946610524136avg accuracy: 0.9112500000000001
+Evaluation 18080th iteration - avg loss: 0.37577398375781107avg accuracy: 0.9112057522123895
+Evaluation 18240th iteration - avg loss: 0.37584228025128447avg accuracy: 0.9111907894736844
+Evaluation 18400th iteration - avg loss: 0.3760929529179576avg accuracy: 0.9111304347826088
+Evaluation 18560th iteration - avg loss: 0.37622638556359594avg accuracy: 0.9110969827586208
+Evaluation 18720th iteration - avg loss: 0.3759934546165248avg accuracy: 0.9111538461538463
+Evaluation 18880th iteration - avg loss: 0.3762810283142213avg accuracy: 0.9110826271186442
+Evaluation 19040th iteration - avg loss: 0.37660073984068027avg accuracy: 0.9110042016806723
+Evaluation 19200th iteration - avg loss: 0.3772179536630089avg accuracy: 0.9108499999999999
+Evaluation 19360th iteration - avg loss: 0.37721045697627453avg accuracy: 0.9108512396694216
+Evaluation 19520th iteration - avg loss: 0.37739378732923023avg accuracy: 0.9108053278688526
+Evaluation 19680th iteration - avg loss: 0.3772084764194508avg accuracy: 0.9108516260162602
+Evaluation 19840th iteration - avg loss: 0.37681641291203577avg accuracy: 0.9109475806451613
+Evaluation 20000th iteration - avg loss: 0.37737246044930073avg accuracy: 0.91081
+Evaluation 20160th iteration - avg loss: 0.37736193987703515avg accuracy: 0.910813492063492
+Evaluation 20320th iteration - avg loss: 0.3779438016014944avg accuracy: 0.9106692913385829
+Evaluation 20480th iteration - avg loss: 0.37816933364874783avg accuracy: 0.9106132812500001
+Evaluation 20640th iteration - avg loss: 0.3786274334127011avg accuracy: 0.9105000000000001
+Evaluation 20800th iteration - avg loss: 0.378779643270402avg accuracy: 0.9104634615384615
+Evaluation 20960th iteration - avg loss: 0.37875560343724085avg accuracy: 0.9104694656488551
+Evaluation 21120th iteration - avg loss: 0.37829624285760943avg accuracy: 0.9105833333333333
+Evaluation 21280th iteration - avg loss: 0.3791984767404462avg accuracy: 0.9103590225563911
+Evaluation 21440th iteration - avg loss: 0.3793757465343102avg accuracy: 0.9103171641791045
+Evaluation 21600th iteration - avg loss: 0.37938349368154173avg accuracy: 0.9103166666666669
+0.20474325682641406
+0.37941748990007984
+~~~~~~~~~~~~~~~~~~~~
+
+
+4000th iteration loss: 0.697369396686554, avg loss: 0.46254538575341575
+8000th iteration loss: 0.7074950933456421, avg loss: 0.5664675509653316
+12000th iteration loss: 1.1367419958114624, avg loss: 0.6295086232739365
+16000th iteration loss: 0.5783437490463257, avg loss: 0.6653236604348421
+20000th iteration loss: 0.7389587163925171, avg loss: 0.6842806730961485
+24000th iteration loss: 0.6051702499389648, avg loss: 0.6776653094660917
+28000th iteration loss: 0.7901811003684998, avg loss: 0.6264807964104812
+32000th iteration loss: 0.012197819538414478, avg loss: 0.5733121071624481
+36000th iteration loss: 0.20825524628162384, avg loss: 0.5283655715324799
+40000th iteration loss: 0.3997900187969208, avg loss: 0.4879744737955215
+44000th iteration loss: 0.1475050151348114, avg loss: 0.45349014380908687
+48000th iteration loss: 0.005501804407685995, avg loss: 0.4230786823147821
+52000th iteration loss: 0.015966113656759262, avg loss: 0.39678119829786324
+56000th iteration loss: 0.5058050155639648, avg loss: 0.41465601009799896
+60000th iteration loss: 0.32043787837028503, avg loss: 0.4241794240231551
+64000th iteration loss: 0.017199218273162842, avg loss: 0.42629102363270277
+68000th iteration loss: 0.015170039609074593, avg loss: 0.4236521603397425
+72000th iteration loss: 0.20111404359340668, avg loss: 0.4199932165622298
+76000th iteration loss: 0.5325369238853455, avg loss: 0.4150093640912335
+80000th iteration loss: 0.7986109852790833, avg loss: 0.4223839298064819
+84000th iteration loss: 0.22782927751541138, avg loss: 0.43395070645461464
+88000th iteration loss: 0.914399266242981, avg loss: 0.44521762012762256
+92000th iteration loss: 0.6901148557662964, avg loss: 0.45714020444355563
+96000th iteration loss: 0.35375967621803284, avg loss: 0.4676475297851913
+100000th iteration loss: 0.182123064994812, avg loss: 0.4682867958119883
+104000th iteration loss: 0.5315978527069092, avg loss: 0.4649261337804613
+108000th iteration loss: 0.02149192802608013, avg loss: 0.45962241931466
+112000th iteration loss: 0.02627350576221943, avg loss: 0.45233127923912414
+116000th iteration loss: 0.4178254306316376, avg loss: 0.44459347961017387
+120000th iteration loss: 0.37318310141563416, avg loss: 0.4394394542569953
+124000th iteration loss: 0.2873742878437042, avg loss: 0.4370691965395093
+128000th iteration loss: 0.9221728444099426, avg loss: 0.43934054559886854
+132000th iteration loss: 0.8640210628509521, avg loss: 0.43924742301372155
+136000th iteration loss: 0.3695162832736969, avg loss: 0.43505583494951294
+140000th iteration loss: 0.0005667298100888729, avg loss: 0.42881207279764477
+144000th iteration loss: 0.5507349967956543, avg loss: 0.42239908471030957
+148000th iteration loss: 0.6022027730941772, avg loss: 0.41855292403206007
+152000th iteration loss: 0.16852211952209473, avg loss: 0.4166621319981971
+156000th iteration loss: 0.016393426805734634, avg loss: 0.4152188960922904
+Evaluation 160th iteration - avg loss: 0.41496298866113646avg accuracy: 0.8969999999999999
+Evaluation 320th iteration - avg loss: 0.4161589035240468avg accuracy: 0.8967499999999999
+Evaluation 480th iteration - avg loss: 0.44251520445880793avg accuracy: 0.8898333333333334
+Evaluation 640th iteration - avg loss: 0.432865915025468avg accuracy: 0.8923124999999998
+Evaluation 800th iteration - avg loss: 0.43837465496966616avg accuracy: 0.8909
+Evaluation 960th iteration - avg loss: 0.45105629768416594avg accuracy: 0.8875833333333334
+Evaluation 1120th iteration - avg loss: 0.45220332832541316avg accuracy: 0.8872857142857142
+Evaluation 1280th iteration - avg loss: 0.45977464793395484avg accuracy: 0.8853124999999998
+Evaluation 1440th iteration - avg loss: 0.46104017766839306avg accuracy: 0.8849722222222222
+Evaluation 1600th iteration - avg loss: 0.4635722954070661avg accuracy: 0.884325
+Evaluation 1760th iteration - avg loss: 0.4590425985082137avg accuracy: 0.8855227272727273
+Evaluation 1920th iteration - avg loss: 0.46231679605164877avg accuracy: 0.8846666666666666
+Evaluation 2080th iteration - avg loss: 0.46478694832006184avg accuracy: 0.8840192307692308
+Evaluation 2240th iteration - avg loss: 0.47572835396193636avg accuracy: 0.8811607142857143
+Evaluation 2400th iteration - avg loss: 0.4740006186867443avg accuracy: 0.8816166666666667
+Evaluation 2560th iteration - avg loss: 0.4767565333386301avg accuracy: 0.8808906249999999
+Evaluation 2720th iteration - avg loss: 0.4780500113628531avg accuracy: 0.8805588235294117
+Evaluation 2880th iteration - avg loss: 0.4825553746971612avg accuracy: 0.8793749999999998
+Evaluation 3040th iteration - avg loss: 0.48648509812222696avg accuracy: 0.8783421052631578
+Evaluation 3200th iteration - avg loss: 0.49214358611032366avg accuracy: 0.8768625
+Evaluation 3360th iteration - avg loss: 0.4945742611679071avg accuracy: 0.8762261904761904
+Evaluation 3520th iteration - avg loss: 0.4932240805313499avg accuracy: 0.8765795454545454
+Evaluation 3680th iteration - avg loss: 0.4991526120792791avg accuracy: 0.8750326086956522
+Evaluation 3840th iteration - avg loss: 0.5005905987432925avg accuracy: 0.87465625
+Evaluation 4000th iteration - avg loss: 0.5040561141469516avg accuracy: 0.87376
+Evaluation 4160th iteration - avg loss: 0.5065911313505449avg accuracy: 0.8730961538461539
+Evaluation 4320th iteration - avg loss: 0.509784360841365avg accuracy: 0.8722592592592592
+Evaluation 4480th iteration - avg loss: 0.5130357419597983avg accuracy: 0.8714107142857143
+Evaluation 4640th iteration - avg loss: 0.5158081742236391avg accuracy: 0.8706896551724138
+Evaluation 4800th iteration - avg loss: 0.5210014966242792avg accuracy: 0.8693333333333332
+Evaluation 4960th iteration - avg loss: 0.520206831954044avg accuracy: 0.8695403225806452
+Evaluation 5120th iteration - avg loss: 0.5240634673780733avg accuracy: 0.86853125
+Evaluation 5280th iteration - avg loss: 0.5265448049553952avg accuracy: 0.8678787878787878
+Evaluation 5440th iteration - avg loss: 0.5262159078833921avg accuracy: 0.8679705882352939
+Evaluation 5600th iteration - avg loss: 0.5328223016435679avg accuracy: 0.8662428571428572
+Evaluation 5760th iteration - avg loss: 0.5346206709503248avg accuracy: 0.8657708333333332
+Evaluation 5920th iteration - avg loss: 0.5378763807946942avg accuracy: 0.8649189189189189
+Evaluation 6080th iteration - avg loss: 0.5398904992512574avg accuracy: 0.8643881578947368
+Evaluation 6240th iteration - avg loss: 0.5414160940425996avg accuracy: 0.8639871794871796
+Evaluation 6400th iteration - avg loss: 0.5451953595349914avg accuracy: 0.8630000000000001
+Evaluation 6560th iteration - avg loss: 0.5473442485056272avg accuracy: 0.8624329268292683
+Evaluation 6720th iteration - avg loss: 0.549205190732166avg accuracy: 0.8619464285714286
+Evaluation 6880th iteration - avg loss: 0.5518637892297404avg accuracy: 0.86125
+Evaluation 7040th iteration - avg loss: 0.5561390000326686avg accuracy: 0.8601306818181818
+Evaluation 7200th iteration - avg loss: 0.5573117479242178avg accuracy: 0.8598277777777779
+Evaluation 7360th iteration - avg loss: 0.5587941886707837avg accuracy: 0.8594402173913043
+Evaluation 7520th iteration - avg loss: 0.5595446234393092avg accuracy: 0.8592446808510639
+Evaluation 7680th iteration - avg loss: 0.5629684951765133avg accuracy: 0.8583489583333335
+Evaluation 7840th iteration - avg loss: 0.5642614915705647avg accuracy: 0.8580102040816326
+Evaluation 8000th iteration - avg loss: 0.5665624980463181avg accuracy: 0.857405
+Evaluation 8160th iteration - avg loss: 0.5681271422615585avg accuracy: 0.8569950980392157
+Evaluation 8320th iteration - avg loss: 0.5706858654922913avg accuracy: 0.8563269230769232
+Evaluation 8480th iteration - avg loss: 0.5737984758019798avg accuracy: 0.8555141509433962
+Evaluation 8640th iteration - avg loss: 0.5757987179513159avg accuracy: 0.8549907407407408
+Evaluation 8800th iteration - avg loss: 0.579362522637133avg accuracy: 0.8540590909090909
+Evaluation 8960th iteration - avg loss: 0.5808171802792848avg accuracy: 0.8536785714285714
+Evaluation 9120th iteration - avg loss: 0.5840877282041076avg accuracy: 0.8528245614035088
+Evaluation 9280th iteration - avg loss: 0.5867848949137562avg accuracy: 0.8521206896551724
+Evaluation 9440th iteration - avg loss: 0.5885640619817916avg accuracy: 0.8516567796610169
+Evaluation 9600th iteration - avg loss: 0.5917242920571395avg accuracy: 0.8508291666666666
+Evaluation 9760th iteration - avg loss: 0.5935454752395448avg accuracy: 0.8503524590163934
+Evaluation 9920th iteration - avg loss: 0.597060645837149avg accuracy: 0.8494354838709677
+Evaluation 10080th iteration - avg loss: 0.5976437215275678avg accuracy: 0.849281746031746
+Evaluation 10240th iteration - avg loss: 0.6003084441848842avg accuracy: 0.8485859375
+Evaluation 10400th iteration - avg loss: 0.6015554028480815avg accuracy: 0.8482576923076922
+Evaluation 10560th iteration - avg loss: 0.6036714383268686avg accuracy: 0.8477045454545454
+Evaluation 10720th iteration - avg loss: 0.6074927502341304avg accuracy: 0.846705223880597
+Evaluation 10880th iteration - avg loss: 0.6080322555543664avg accuracy: 0.8465625
+Evaluation 11040th iteration - avg loss: 0.6115199815028051avg accuracy: 0.8456521739130435
+Evaluation 11200th iteration - avg loss: 0.6123361360308315avg accuracy: 0.8454392857142857
+Evaluation 11360th iteration - avg loss: 0.6149869896851899avg accuracy: 0.8447464788732394
+Evaluation 11520th iteration - avg loss: 0.6173107840486207avg accuracy: 0.8441388888888889
+Evaluation 11680th iteration - avg loss: 0.6195973856125844avg accuracy: 0.843541095890411
+Evaluation 11840th iteration - avg loss: 0.6224339315661456avg accuracy: 0.8427972972972974
+Evaluation 12000th iteration - avg loss: 0.6232248934777453avg accuracy: 0.84259
+Evaluation 12160th iteration - avg loss: 0.6261715165791285avg accuracy: 0.8418190789473684
+Evaluation 12320th iteration - avg loss: 0.6275148770097619avg accuracy: 0.8414675324675326
+Evaluation 12480th iteration - avg loss: 0.6293512818325931avg accuracy: 0.8409871794871795
+Evaluation 12640th iteration - avg loss: 0.6315515850787051avg accuracy: 0.8404113924050632
+Evaluation 12800th iteration - avg loss: 0.6340344107223791avg accuracy: 0.8397625
+Evaluation 12960th iteration - avg loss: 0.6355170295624074avg accuracy: 0.8393734567901233
+Evaluation 13120th iteration - avg loss: 0.6376808605970327avg accuracy: 0.8388048780487805
+Evaluation 13280th iteration - avg loss: 0.6390490312928738avg accuracy: 0.83844578313253
+Evaluation 13440th iteration - avg loss: 0.6400795031772716avg accuracy: 0.8381755952380952
+Evaluation 13600th iteration - avg loss: 0.642587825663196avg accuracy: 0.8375176470588235
+Evaluation 13760th iteration - avg loss: 0.6421366419048904avg accuracy: 0.8376337209302326
+Evaluation 13920th iteration - avg loss: 0.6445121958980272avg accuracy: 0.8370114942528736
+Evaluation 14080th iteration - avg loss: 0.6465653834909476avg accuracy: 0.8364744318181818
+Evaluation 14240th iteration - avg loss: 0.6486435327056294avg accuracy: 0.8359297752808988
+Evaluation 14400th iteration - avg loss: 0.6492597256761251avg accuracy: 0.8357694444444445
+Evaluation 14560th iteration - avg loss: 0.6514517457055562avg accuracy: 0.8351978021978022
+Evaluation 14720th iteration - avg loss: 0.6538938680643459avg accuracy: 0.8345597826086956
+Evaluation 14880th iteration - avg loss: 0.6550079001458011avg accuracy: 0.8342688172043011
+Evaluation 15040th iteration - avg loss: 0.6578131373293025avg accuracy: 0.8335345744680851
+Evaluation 15200th iteration - avg loss: 0.6583812920332544avg accuracy: 0.8333842105263158
+Evaluation 15360th iteration - avg loss: 0.6614687391057184avg accuracy: 0.8325755208333334
+Evaluation 15520th iteration - avg loss: 0.662335905864638avg accuracy: 0.83234793814433
+Evaluation 15680th iteration - avg loss: 0.6640934093665256avg accuracy: 0.8318877551020408
+Evaluation 15840th iteration - avg loss: 0.6654260878237153avg accuracy: 0.8315404040404041
+Evaluation 16000th iteration - avg loss: 0.6671159354744013avg accuracy: 0.8311000000000001
+Evaluation 16160th iteration - avg loss: 0.669224739448043avg accuracy: 0.8305470297029703
+Evaluation 16320th iteration - avg loss: 0.6711128075519239avg accuracy: 0.8300539215686275
+Evaluation 16480th iteration - avg loss: 0.6730827733746603avg accuracy: 0.8295388349514564
+Evaluation 16640th iteration - avg loss: 0.6734703444320566avg accuracy: 0.8294375
+Evaluation 16800th iteration - avg loss: 0.6760044956136317avg accuracy: 0.8287761904761906
+Evaluation 16960th iteration - avg loss: 0.6776628327216593avg accuracy: 0.8283419811320755
+Evaluation 17120th iteration - avg loss: 0.6795655458557385avg accuracy: 0.8278434579439252
+Evaluation 17280th iteration - avg loss: 0.6820532947315197avg accuracy: 0.8271921296296297
+Evaluation 17440th iteration - avg loss: 0.6832640300874402avg accuracy: 0.8268761467889908
+Evaluation 17600th iteration - avg loss: 0.6850864018878731avg accuracy: 0.8263999999999999
+Evaluation 17760th iteration - avg loss: 0.6868346522166813avg accuracy: 0.8259436936936937
+Evaluation 17920th iteration - avg loss: 0.6887123269172402avg accuracy: 0.825453125
+Evaluation 18080th iteration - avg loss: 0.6907385513419285avg accuracy: 0.8249225663716815
+Evaluation 18240th iteration - avg loss: 0.6919999833320872avg accuracy: 0.8245921052631578
+Evaluation 18400th iteration - avg loss: 0.6939356164965252avg accuracy: 0.8240869565217391
+Evaluation 18560th iteration - avg loss: 0.6955893956027436avg accuracy: 0.8236530172413793
+Evaluation 18720th iteration - avg loss: 0.6971495927888581avg accuracy: 0.8232457264957265
+Evaluation 18880th iteration - avg loss: 0.6984049777944288avg accuracy: 0.8229194915254238
+Evaluation 19040th iteration - avg loss: 0.6994816520246442avg accuracy: 0.822638655462185
+Evaluation 19200th iteration - avg loss: 0.7017437771939634avg accuracy: 0.8220479166666667
+Evaluation 19360th iteration - avg loss: 0.7025768690440449avg accuracy: 0.8218305785123967
+Evaluation 19520th iteration - avg loss: 0.7029735191452287avg accuracy: 0.8217274590163934
+Evaluation 19680th iteration - avg loss: 0.698235565712543avg accuracy: 0.8229674796747968
+Evaluation 19840th iteration - avg loss: 0.6934110203393615avg accuracy: 0.8242298387096775
+Evaluation 20000th iteration - avg loss: 0.6886179492034018avg accuracy: 0.825484
+Evaluation 20160th iteration - avg loss: 0.6839299415906204avg accuracy: 0.8267103174603174
+Evaluation 20320th iteration - avg loss: 0.6793025186806038avg accuracy: 0.8279212598425197
+Evaluation 20480th iteration - avg loss: 0.6751146609751231avg accuracy: 0.829017578125
+Evaluation 20640th iteration - avg loss: 0.6707210913969226avg accuracy: 0.8301666666666666
+Evaluation 20800th iteration - avg loss: 0.6663235004981443avg accuracy: 0.8313173076923077
+Evaluation 20960th iteration - avg loss: 0.6623009101510802avg accuracy: 0.8323702290076336
+Evaluation 21120th iteration - avg loss: 0.6582004234387899avg accuracy: 0.8334431818181818
+Evaluation 21280th iteration - avg loss: 0.6540966957265728avg accuracy: 0.8345169172932331
+Evaluation 21440th iteration - avg loss: 0.6500128753424219avg accuracy: 0.8355858208955224
+Evaluation 21600th iteration - avg loss: 0.6462304419579191avg accuracy: 0.836575925925926
+Evaluation 21760th iteration - avg loss: 0.6422144148256527avg accuracy: 0.8376268382352942
+Evaluation 21920th iteration - avg loss: 0.6385792103085334avg accuracy: 0.8385784671532847
+Evaluation 22080th iteration - avg loss: 0.6351016728468138avg accuracy: 0.8394891304347826
+Evaluation 22240th iteration - avg loss: 0.6315777827682403avg accuracy: 0.8404118705035972
+Evaluation 22400th iteration - avg loss: 0.6279997705745544avg accuracy: 0.8413482142857143
+Evaluation 22560th iteration - avg loss: 0.6247198048456414avg accuracy: 0.8422074468085107
+Evaluation 22720th iteration - avg loss: 0.6211460053466562avg accuracy: 0.8431426056338028
+Evaluation 22880th iteration - avg loss: 0.617951753844468avg accuracy: 0.8439790209790209
+Evaluation 23040th iteration - avg loss: 0.6148007213359556avg accuracy: 0.8448038194444444
+Evaluation 23200th iteration - avg loss: 0.6114827867290648avg accuracy: 0.8456724137931034
+Evaluation 23360th iteration - avg loss: 0.6084145912270649avg accuracy: 0.8464760273972602
+Evaluation 23520th iteration - avg loss: 0.605641067222784avg accuracy: 0.847202380952381
+Evaluation 23680th iteration - avg loss: 0.6025551548288235avg accuracy: 0.8480101351351351
+Evaluation 23840th iteration - avg loss: 0.5995880921750998avg accuracy: 0.848786912751678
+Evaluation 24000th iteration - avg loss: 0.5968213054300285avg accuracy: 0.8495116666666667
+Evaluation 24160th iteration - avg loss: 0.5938596715779038avg accuracy: 0.8502864238410596
+Evaluation 24320th iteration - avg loss: 0.5911608668541273avg accuracy: 0.8509934210526315
+Evaluation 24480th iteration - avg loss: 0.5884521596389366avg accuracy: 0.851702614379085
+Evaluation 24640th iteration - avg loss: 0.5857613991614122avg accuracy: 0.8524074675324675
+Evaluation 24800th iteration - avg loss: 0.5833148980138433avg accuracy: 0.8530483870967743
+Evaluation 24960th iteration - avg loss: 0.5810282286666244avg accuracy: 0.853647435897436
+Evaluation 25120th iteration - avg loss: 0.5783676822551905avg accuracy: 0.8543439490445861
+Evaluation 25280th iteration - avg loss: 0.5759178601284924avg accuracy: 0.854985759493671
+Evaluation 25440th iteration - avg loss: 0.5733774780344113avg accuracy: 0.8556509433962265
+Evaluation 25600th iteration - avg loss: 0.5710204514144425avg accuracy: 0.85626875
+Evaluation 25760th iteration - avg loss: 0.5685652357541308avg accuracy: 0.8569114906832298
+Evaluation 25920th iteration - avg loss: 0.5662490316266395avg accuracy: 0.8575185185185186
+Evaluation 26080th iteration - avg loss: 0.5639195715160069avg accuracy: 0.8581288343558282
+Evaluation 26240th iteration - avg loss: 0.5618763769416013avg accuracy: 0.8586646341463415
+Evaluation 26400th iteration - avg loss: 0.5599629070616864avg accuracy: 0.8591666666666666
+Evaluation 26560th iteration - avg loss: 0.5577945074446623avg accuracy: 0.8597349397590361
+Evaluation 26720th iteration - avg loss: 0.5559966687865215avg accuracy: 0.8602065868263473
+Evaluation 26880th iteration - avg loss: 0.5536836286760046avg accuracy: 0.8608125
+Evaluation 27040th iteration - avg loss: 0.551989014316061avg accuracy: 0.8612573964497042
+Evaluation 27200th iteration - avg loss: 0.5499568268662893avg accuracy: 0.8617897058823529
+Evaluation 27360th iteration - avg loss: 0.5479952707512942avg accuracy: 0.8623040935672515
+Evaluation 27520th iteration - avg loss: 0.5460877266217722avg accuracy: 0.8628037790697675
+Evaluation 27680th iteration - avg loss: 0.5443911437411534avg accuracy: 0.8632485549132949
+Evaluation 27840th iteration - avg loss: 0.5425045246625688avg accuracy: 0.8637428160919541
+Evaluation 28000th iteration - avg loss: 0.5408329188694645avg accuracy: 0.8641814285714287
+Evaluation 28160th iteration - avg loss: 0.5392291434915519avg accuracy: 0.8646022727272727
+Evaluation 28320th iteration - avg loss: 0.5378208590906881avg accuracy: 0.8649717514124293
+Evaluation 28480th iteration - avg loss: 0.536270783093805avg accuracy: 0.8653792134831461
+Evaluation 28640th iteration - avg loss: 0.5346917958930785avg accuracy: 0.8657932960893855
+Evaluation 28800th iteration - avg loss: 0.5331099871535682avg accuracy: 0.8662083333333335
+Evaluation 28960th iteration - avg loss: 0.5313870112214866avg accuracy: 0.8666602209944752
+Evaluation 29120th iteration - avg loss: 0.52974910995978avg accuracy: 0.8670892857142857
+Evaluation 29280th iteration - avg loss: 0.5284195425829855avg accuracy: 0.8674385245901639
+Evaluation 29440th iteration - avg loss: 0.5267812472062676avg accuracy: 0.8678682065217391
+Evaluation 29600th iteration - avg loss: 0.5252678934300343avg accuracy: 0.8682648648648649
+Evaluation 29760th iteration - avg loss: 0.523877890585416avg accuracy: 0.8686290322580645
+Evaluation 29920th iteration - avg loss: 0.5227852940666464avg accuracy: 0.8689157754010695
+Evaluation 30080th iteration - avg loss: 0.5210583047184009avg accuracy: 0.8693683510638298
+Evaluation 30240th iteration - avg loss: 0.5196027452482167avg accuracy: 0.86975
+Evaluation 30400th iteration - avg loss: 0.5182943443917841avg accuracy: 0.8700934210526315
+Evaluation 30560th iteration - avg loss: 0.5172041113790081avg accuracy: 0.8703795811518326
+Evaluation 30720th iteration - avg loss: 0.5158590658186465avg accuracy: 0.8707330729166666
+Evaluation 30880th iteration - avg loss: 0.5145592158846678avg accuracy: 0.8710738341968912
+Evaluation 31040th iteration - avg loss: 0.5133868585175057avg accuracy: 0.871381443298969
+Evaluation 31200th iteration - avg loss: 0.5117548149291617avg accuracy: 0.8718089743589744
+Evaluation 31360th iteration - avg loss: 0.5105850936233765avg accuracy: 0.8721160714285715
+Evaluation 31520th iteration - avg loss: 0.5094459481332877avg accuracy: 0.8724149746192894
+Evaluation 31680th iteration - avg loss: 0.5084272076170586avg accuracy: 0.8726830808080809
+Evaluation 31840th iteration - avg loss: 0.5070933371066846avg accuracy: 0.8730326633165829
+Evaluation 32000th iteration - avg loss: 0.5059746486776857avg accuracy: 0.8733262500000001
+Evaluation 32160th iteration - avg loss: 0.5048193207391148avg accuracy: 0.873629353233831
+Evaluation 32320th iteration - avg loss: 0.503931618151013avg accuracy: 0.8738626237623763
+Evaluation 32480th iteration - avg loss: 0.5028684371509452avg accuracy: 0.8741416256157636
+Evaluation 32640th iteration - avg loss: 0.501877483261998avg accuracy: 0.8744019607843139
+Evaluation 32800th iteration - avg loss: 0.5008352430943377avg accuracy: 0.8746756097560977
+Evaluation 32960th iteration - avg loss: 0.49966489228332933avg accuracy: 0.8749830097087379
+Evaluation 33120th iteration - avg loss: 0.4986236452302167avg accuracy: 0.8752560386473431
+Evaluation 33280th iteration - avg loss: 0.4973320135778452avg accuracy: 0.875594951923077
+Evaluation 33440th iteration - avg loss: 0.4964755147297835avg accuracy: 0.8758205741626794
+Evaluation 33600th iteration - avg loss: 0.4959327402311776avg accuracy: 0.8759642857142858
+Evaluation 33760th iteration - avg loss: 0.49490347294240605avg accuracy: 0.8762345971563982
+Evaluation 33920th iteration - avg loss: 0.49408112525075615avg accuracy: 0.8764504716981133
+Evaluation 34080th iteration - avg loss: 0.49314899238497634avg accuracy: 0.8766948356807512
+Evaluation 34240th iteration - avg loss: 0.49223713639511063avg accuracy: 0.8769345794392525
+Evaluation 34400th iteration - avg loss: 0.49132482038079867avg accuracy: 0.8771744186046513
+Evaluation 34560th iteration - avg loss: 0.4905445466505221avg accuracy: 0.8773796296296298
+Evaluation 34720th iteration - avg loss: 0.48983723242833677avg accuracy: 0.877565668202765
+Evaluation 34880th iteration - avg loss: 0.48897422207770397avg accuracy: 0.8777924311926606
+Evaluation 35040th iteration - avg loss: 0.488549266100572avg accuracy: 0.8779052511415526
+Evaluation 35200th iteration - avg loss: 0.4877164195974315avg accuracy: 0.8781238636363637
+Evaluation 35360th iteration - avg loss: 0.486940321558665avg accuracy: 0.8783280542986427
+Evaluation 35520th iteration - avg loss: 0.486339478733318avg accuracy: 0.8784864864864866
+Evaluation 35680th iteration - avg loss: 0.4853396115508745avg accuracy: 0.8787488789237669
+Evaluation 35840th iteration - avg loss: 0.4847421515018401avg accuracy: 0.8789062500000001
+Evaluation 36000th iteration - avg loss: 0.4840570043201765avg accuracy: 0.8790866666666668
+Evaluation 36160th iteration - avg loss: 0.4833470520851371avg accuracy: 0.8792732300884957
+Evaluation 36320th iteration - avg loss: 0.4826574513501496avg accuracy: 0.879454845814978
+Evaluation 36480th iteration - avg loss: 0.48197251325799967avg accuracy: 0.8796348684210527
+Evaluation 36640th iteration - avg loss: 0.4811980467075665avg accuracy: 0.8798384279475984
+Evaluation 36800th iteration - avg loss: 0.48066684694317896avg accuracy: 0.8799793478260871
+Evaluation 36960th iteration - avg loss: 0.4800543983748638avg accuracy: 0.8801406926406927
+Evaluation 37120th iteration - avg loss: 0.4797200854163685avg accuracy: 0.880229525862069
+Evaluation 37280th iteration - avg loss: 0.47910152722400906avg accuracy: 0.880392703862661
+Evaluation 37440th iteration - avg loss: 0.4788547806065673avg accuracy: 0.8804583333333333
+Evaluation 37600th iteration - avg loss: 0.47808118620609985avg accuracy: 0.8806617021276597
+Evaluation 37760th iteration - avg loss: 0.47748780517229195avg accuracy: 0.8808177966101697
+Evaluation 37920th iteration - avg loss: 0.47698125304587435avg accuracy: 0.8809514767932491
+Evaluation 38080th iteration - avg loss: 0.47656760548565247avg accuracy: 0.8810609243697479
+Evaluation 38240th iteration - avg loss: 0.47627401991209567avg accuracy: 0.8811391213389121
+Evaluation 38400th iteration - avg loss: 0.4756712055924193avg accuracy: 0.8812979166666668
+Evaluation 38560th iteration - avg loss: 0.4751684264847004avg accuracy: 0.8814304979253114
+Evaluation 38720th iteration - avg loss: 0.4747924030571791avg accuracy: 0.881529958677686
+Evaluation 38880th iteration - avg loss: 0.47438792647815925avg accuracy: 0.8816368312757202
+Evaluation 39040th iteration - avg loss: 0.47392073348145475avg accuracy: 0.8817602459016395
+Evaluation 39200th iteration - avg loss: 0.4732886817621789avg accuracy: 0.881926530612245
+Evaluation 39360th iteration - avg loss: 0.4730334804837717avg accuracy: 0.8819949186991872
+Evaluation 39520th iteration - avg loss: 0.4726867122001105avg accuracy: 0.882087044534413
+Evaluation 39680th iteration - avg loss: 0.47247808966813837avg accuracy: 0.8821431451612903
+Evaluation 39840th iteration - avg loss: 0.4718626271671032avg accuracy: 0.8823052208835341
+0.4115496478899974
+0.4713165874782093
+~~~~~~~~~~~~~~~~~~~~
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_0_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_0.txt
+Training avg loss: 0.20474325682641406
+Eval avg loss: 0.37941748990007984
+~~~~~~~~~~~~~~~~~~~~
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_1_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_1.txt
+Training avg loss: 0.4115496478899974
+Eval avg loss: 0.4713165874782093
+~~~~~~~~~~~~~~~~~~~~
+
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_2_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_2.txt
+Training avg loss: 0.46254538575341575
+Eval avg loss: 0.5664675509653316
+~~~~~~~~~~~~~~~~~~~~
+
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_3_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_3.txt
+Training avg loss: 0.37048176570023306
+Eval avg loss: 0.41496298866113646
+~~~~~~~~~~~~~~~~~~~~
+
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_5_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_5.txt
+Training avg loss: 0.3695162832736969
+Eval avg loss: 0.43505583494951294
+~~~~~~~~~~~~~~~~~~~~
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_6_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_6.txt
+Training avg loss: 0.2873742878437042
+Eval avg loss: 0.4370691965395093
+~~~~~~~~~~~~~~~~~~~~
+
+
+Processing dataset/sample_0_cache_10/dataset_0_sampled_80_7_cached_trace_opt.txt and dataset/sample_0/dataset_0_sampled_80_7.txt
+Training avg loss: 0.27331050012305785
+Eval avg loss: 0.3342556059360504
+~~~~~~~~~~~~~~~~~~~~
+

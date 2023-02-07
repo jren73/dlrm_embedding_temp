@@ -210,6 +210,8 @@ def run(traceFile, model_type):
 
     model = seq2seq_prefetch(config)
     model = model.to(device)
+    # Optimizer
+    optimizer = torch.optim.Adam(model.parameters(), lr=config.get("learning_rate", .001))
     print(model)
     if model_type == 1:
         model.load_state_dict(torch.load('predict_model.pt'))
@@ -269,12 +271,18 @@ def run(traceFile, model_type):
         FLAGS.train_size = len(gt_trace)
         assert(len(gt_trace) == len(block_trace))
 
-       
+        
         train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length) 
         train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=False, collate_fn=None, drop_last=True)
+        '''
         for i in train_loader:
                 print(i)
                 break
+        '''
+        run_state = (n_epochs, n_epochs, input_sequence_length)
+        # Optimizer
+        # Train needs to return model and optimizer, otherwise the model keeps restarting from zero at every epoch
+        model, optimizer = train(model, optimizer, train_loader, run_state)
         '''
         else:
             data_len = len(gt_trace)
