@@ -9,7 +9,7 @@ import tqdm
 import torch.nn.functional as F
 from seq2seq_prefetching import seq2seq_prefetch
 from torch.utils.data import DataLoader
-from utils import prepare_data, MyDataset_cache, MyDataset_prefetch
+from utils import prepare_data, MyDataset, MyDataset_prefetch
 import pandas as pd
 import numpy as np
 import glob
@@ -272,7 +272,7 @@ def run(traceFile, model_type):
         assert(len(gt_trace) == len(block_trace))
 
         
-        train_set = MyDataset_prefetch(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length) 
+        train_set = MyDataset(gt_trace[:],block_trace[:],input_sequence_length,evaluation_windown_length) 
         train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=False, collate_fn=None, drop_last=True)
         '''
         for i in train_loader:

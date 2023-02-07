@@ -7,18 +7,18 @@
     ├── simulator                                            # simulate different caching behavior
     ├── run.sh                                               # train the model
     └── README.md
-    
+
 ## Train cache model from scratch
-./run.sh -c
+ ./run.sh -c
 
 ## Train cache model from last cache model checkpoint
-./run.sh -c -e
+ ./run.sh -c -e
 
 ## Train prefetch model from scratch
-./run.sh -p
+ ./run.sh -p
 
 ## Train prefetch model from last cache model checkpoint
-./run.sh -p -e
+ ./run.sh -p -e
 
 ## Generate dataset from scratch
 

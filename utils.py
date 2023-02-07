@@ -154,17 +154,17 @@ def prepare_data(traceFile, ratio=0.1, model_type=1):
         return dataset,gt
         
 
-class ToyDataset(data.Dataset):
+class MyDataset(data.Dataset):
     """
     https://talbaumel.github.io/blog/attention/
     """
-    def __init__(self, min_length=5, max_length=20, type='train'):
+    def __init__(self,  sample, groundtruth, input_sequence=10,evaluation_window=10, min_length=19, max_length=20, type='train'):
         self.SOS = "<s>"  # all strings will end with the End Of String token
         self.EOS = "</s>"  # all strings will end with the End Of String token
         self.characters = list("abcd")
         self.int2char = list(self.characters)
         self.char2int = {c: i+3 for i, c in enumerate(self.characters)}
-        print(self.char2int)
+        #print(self.char2int)
         self.VOCAB_SIZE = len(self.characters)
         self.min_length = min_length
         self.max_length = max_length

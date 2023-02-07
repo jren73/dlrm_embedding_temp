@@ -7,18 +7,6 @@ import numpy as np
 from iou_loss import Chamfer1DLoss 
 from torch.autograd import Variable
 
-def mask_3d(inputs, seq_len, mask_value=0.):
-    batches = inputs.size()[0]
-    assert batches == len(seq_len)
-    max_idx = max(seq_len)
-    for n, idx in enumerate(seq_len):
-        if idx < max_idx.item():
-            if len(inputs.size()) == 3:
-                inputs[n, idx.int():, :] = mask_value
-            else:
-                assert len(inputs.size()) == 2, "The size of inputs must be 2 or 3, received {}".format(inputs.size())
-                inputs[n, idx.int():] = mask_value
-    return inputs
 
 def check_size(tensor, *args):
     size = [a for a in args]
@@ -64,19 +52,33 @@ class EncoderRNN(nn.Module):
         for i in range(self.dnn_layers):
             x = F.relu(getattr(self, 'dnn_'+str(i))(x))
         return x
-
+    '''
     def forward(self, inputs, hidden, input_lengths):
         if self.dnn_layers > 0:
             inputs = self.run_dnn(inputs)
         x = inputs.unsqueeze(0)
         x = x.to(torch.float32)
         #x = torch.nn.utils.rnn.pack_padded_sequence(inputs, input_lengths, batch_first=True)
-        outputs, (hidden, cell)  = self.rnn(x)
-        #output, _ = torch.nn.utils.rnn.pad_packed_sequence(output, batch_first=True, padding_value=0.)
+        #outputs, (hidden, cell)  = self.rnn(x)
+        output, _ = torch.nn.utils.rnn.pad_packed_sequence(output, batch_first=True, padding_value=0.)
 
         if self.bi:
             output = output[:, :, :self.hidden_size] + output[:, :, self.hidden_size:]
         return hidden, cell
+    '''
+
+    def forward(self, inputs, hidden, input_lengths):
+        if self.dnn_layers > 0:
+            inputs = self.run_dnn(inputs)
+        x = torch.nn.utils.rnn.pack_padded_sequence(inputs, input_lengths, batch_first=True)
+        output, state = self.rnn(x, hidden)
+        output, _ = pad_packed_sequence(output, batch_first=True, padding_value=0.)
+
+        if self.bi:
+            output = output[:, :, :self.hidden_size] + output[:, :, self.hidden_size:]
+        return output, state
+
+        
 
     def init_hidden(self, batch_size):
         h0 = Variable(torch.zeros(2 if self.bi else 1, batch_size, self.hidden_size))
@@ -311,8 +313,6 @@ class Attention(nn.Module):
         attention_energies = self._score(last_hidden, encoder_outputs, self.method)
         # attn_energies = Variable(torch.zeros(batch_size, seq_lens))  # B x S
 
-        if seq_len is not None:
-            attention_energies = mask_3d(attention_energies, seq_len, -float('inf'))
 
         return F.softmax(attention_energies, -1)
 
