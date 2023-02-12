@@ -332,7 +332,7 @@ if __name__ == '__main__':
     parser.add_argument('--config', type=str)
     parser.add_argument('--epochs', default=1, type=int)
     parser.add_argument('--traceFile', type=str,  help='trace file name\n')
-    parser.add_argument('--model_type', default=1, type=int,  help='0 for caching model, 1 for prefetcing model\n')
+    parser.add_argument('--model_type', default=0, type=int,  help='0 for training from stratch, 1 for loading saved model\n')    parser.add_argument('--infFile', type=str,  help='inference file name\n')
     parser.add_argument('--infFile', type=str,  help='inference file name\n')
 
     FLAGS, _ = parser.parse_known_args()
@@ -340,8 +340,15 @@ if __name__ == '__main__':
     model_type = FLAGS.model_type
     inferenceFile = FLAGS.infFile
 
-    model = "cache" if model_type==0 else "prefetch"
-    print("training " + model + " model with " + traceFile)
+    if model_type == 1:
+        path = 'models/cache_model.pt'
+        check_file = os.path.isfile(path)
+        if check_file is False:
+                print("Can not load caching model from checkpoint.")
+                model_type = 0
+
+    model = "stratch" if model_type==0 else "checkpoint"
+    print("training caching model with " + traceFile + " from " + model)
     initial()
-    #run(traceFile, model_type)
+    run(traceFile, model_type)
     inference(inferenceFile, model_type)
