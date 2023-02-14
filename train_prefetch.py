@@ -344,10 +344,7 @@ if __name__ == '__main__':
     parser.add_argument('--traceFile', type=str,  help='traning file folder\n')
     parser.add_argument('--model_type', default=0, type=int,  help='0 for training from stratch, 1 for loading saved model\n')
     parser.add_argument('--infFile', type=str,  help='inference file name\n')
-    #parser.add_argument('--epochs', default=1200, type=int)
-    #parser.add_argument('--train_size', default=4000000, type=int)
-    #parser.add_argument('--eval_size', default=2600, type=int)
-    #args = parser.parse_args() 
+
 
     FLAGS, _ = parser.parse_known_args()
     traceFile = FLAGS.traceFile
@@ -358,7 +355,7 @@ if __name__ == '__main__':
         path = 'models/predict_model.pt'
         check_file = os.path.isfile(path)
         if check_file is False:
-                print("Can not load model from checkpoint.")
+                print("Can not load prefetch model from checkpoint.")
                 model_type = 0
     
     model = "stratch" if model_type==0 else "checkpoint"
