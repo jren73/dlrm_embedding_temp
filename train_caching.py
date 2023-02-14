@@ -22,11 +22,12 @@ def initial():
     global history 
     global device 
     global processing_file
+    global chk_path 
 
     history = dict(train=[], val=[])
     device = device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     processing_file = ""
-
+    chk_path = 'models/cache_model.pt'
 
 def grub_datafile(datafolder, inputsfolder, model_type=1):
     cache_trainingdata = datafolder+"/*cached_trace_opt.txt"
@@ -278,21 +279,21 @@ if __name__ == '__main__':
     parser.add_argument('--traceFile', type=str,  help='trace file name\n')
     parser.add_argument('--model_type', default=0, type=int,  help='0 for training from stratch, 1 for loading saved model\n')    
     parser.add_argument('--infFile', type=str,  help='inference file name\n')
-    
+
     FLAGS, _ = parser.parse_known_args()
     traceFile = FLAGS.traceFile
     model_type = FLAGS.model_type
     inferenceFile = FLAGS.infFile
+    initial()
 
     if model_type == 1:
-        path = 'models/cache_model.pt'
-        check_file = os.path.isfile(path)
+        check_file = os.path.isfile(chk_path)
         if check_file is False:
                 print("Can not load caching model from checkpoint.")
                 model_type = 0
 
     model = "stratch" if model_type==0 else "checkpoint"
     print("training caching model with " + traceFile + " from " + model)
-    initial()
-    run(traceFile, model_type)
-    inference(inferenceFile, model_type)
+
+    #run(traceFile, model_type)
+    #inference(inferenceFile, model_type)

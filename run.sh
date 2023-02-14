@@ -21,20 +21,32 @@ Help()
 # Main program                                             #
 ############################################################
 ############################################################
-chk=0
-while getopts ":hcpe:" option; do
-   case $option in
-      h) # display Help
+
+while [ ! -z "$1" ]; do
+  case "$1" in
+     --help|-h)
          Help
-         exit;;
-      c) # Enter a name
-         model_type=0;;
-      p) model_type=1;;
-      e) chk=1;;
-     \?) # Invalid option
-         echo "Error: Invalid option"
-         exit;;
-   esac
+         exit
+         ;;
+     --prefetching|-p)
+         shift
+         model_type=1
+         chk=0
+         ;;
+     --caching|-c)
+         shift
+         model_type=0
+         chk=0
+         ;;
+     --checkpoint|-e)
+        chk=1
+        shift
+        echo  "load checkpoint"
+        exit
+
+         ;;
+  esac
+shift
 done
 
 
