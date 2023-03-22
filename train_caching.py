@@ -255,21 +255,30 @@ def inference(trace_file, model_type):
     block_trace = trace[:,1]
     inference_set = MyDataset_cache(block_trace[:],block_trace[:],inf_seq_length)
     print("inferening input ", trace_file)
-    f = open("inference_result.txt", "w")
+    #f = open("inference_result.txt", "w")
     
     index = np.arange(inf_seq_length, len(inference_set), inf_seq_length)
+    res=[]
     with torch.no_grad():    
         for i in index:
             data,j =  inference_set[i]
             evalX = Variable(torch.Tensor(data)).to(device)
             y_pred = model(evalX, evalX[-1])
+            '''
             x = y_pred.cpu().numpy()
             for i in range(len(x)):
                 t=0
                 if sigmoid(x[i])>=0.5:
                     t=1
                 f.write(str(t)+"\n")
-    f.close()
+            '''
+            sigmoid = nn.Sigmoid()
+            r = sigmoid(y_pred)
+            r =  (r>0.5).float()
+            res.append(r)
+    print(res)
+    #f.close()
+    torch.save(res,"my_file.txt")
     print("inference restults are in inference_result.txt")
 
 if __name__ == '__main__':
@@ -296,4 +305,4 @@ if __name__ == '__main__':
     print("training caching model with " + traceFile + " from " + model)
 
     #run(traceFile, model_type)
-    #inference(inferenceFile, model_type)
+    inference(inferenceFile, model_type)
