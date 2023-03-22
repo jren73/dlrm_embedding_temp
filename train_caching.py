@@ -273,7 +273,7 @@ def inference(trace_file, model_type):
             r = sigmoid(y_pred)
             r =  (r>0.5).float()
             res.append(r)
-    print(res)
+    #print(res)
     #f.close()
     torch.save(res,"inference.pt")
     print("inference restults are in inference_result.txt")
