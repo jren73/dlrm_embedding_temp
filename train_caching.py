@@ -49,21 +49,18 @@ def init_weights(m):
     print("Initializing weights...")
     for name, param in m.named_parameters():
         nn.init.uniform_(param.data, -0.08, 0.08)
-
+'''
 def sigmoid(x):
   return 1 / (1 + math.exp(-x))
-
+'''
 def predict(x,y):
     acc = 0
-    x = x.cpu().numpy()
-    y = y.cpu().numpy()
-    assert(len(x) == len(y))
-    for i in range(len(x)):
-        t=0
-        if sigmoid(x[i])>=0.5:
-            t=1
-        if t == y[i]:
-            acc = acc+1
+    sigmoid = nn.Sigmoid()
+    r = sigmoid(x)
+    r =  (r>0.5).float()
+    #need to update here!!!
+    mask = r==y
+    acc = torch.count_nonzero(mask).item()
     return acc/len(x)
 
 
@@ -278,7 +275,7 @@ def inference(trace_file, model_type):
             res.append(r)
     print(res)
     #f.close()
-    torch.save(res,"my_file.txt")
+    torch.save(res,"inference.pt")
     print("inference restults are in inference_result.txt")
 
 if __name__ == '__main__':
@@ -304,5 +301,5 @@ if __name__ == '__main__':
     model = "stratch" if model_type==0 else "checkpoint"
     print("training caching model with " + traceFile + " from " + model)
 
-    #run(traceFile, model_type)
-    inference(inferenceFile, model_type)
+    run(traceFile, model_type)
+    #inference(inferenceFile, model_type)
